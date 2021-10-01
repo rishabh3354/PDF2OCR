@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+GenericName=Pdf2go
+Name=PDF2OCR
+Type=Application
+Icon=pdf2go.png
+Keywords=pdfconverter;imageconverter;textconverter;ocrconverter;
+Exec=pdf2go %F
+Categories=Utility;Qt;
+Terminal=false
+Name[en_US]=PDF2OCR

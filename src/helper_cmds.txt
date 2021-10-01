@@ -1,0 +1,55 @@
+pyrcc5 resource.qrc -o resource_rc.py
+pyuic5 mainwindow.ui > mainwindow.py
+pyuic5 login.ui > login.py
+https://stackoverflow.com/questions/35508711/how-to-enable-pan-and-zoom-in-a-qgraphicsview
+
+https://github.com/Pythondeveloper6
+
+https://www.visualwatermark.com/add-text-to-photos/
+
+
+
+
+
+
+
+
+https://github.com/ubuntu/snapcraft-desktop-helpers/blob/fb943e2be372e2ce605839c20e36cad95f9a7c64/snapcraft.yaml#L147
+
+
+
+https://github.com/search?l=YAML&q=snapcraft.yaml&type=Code
+
+
+https://github.com/keshavbhatt/CurrencyConv/tree/main/src/icons
+
+
+https://snapcraft.io/docs/python-appsp  p
+
+
+
+
+========================================================PYSIDE2=========================================
+
+PyQt5  ==> PySide2
+
+pyside2-rcc resource.qrc -o resource_rc.py
+
+pyqtSignal   ==>  Signal
+
+
+
+https://dashboard.snapcraft.io/stores/snaps/
+
+https://itsfoss.com/use-snap-packages-ubuntu-16-04/
+
+===============================================================================
+
+https://snapcraft.io/docs/remote-build
+
+
+==================snap shell====================
+
+snap run --shell pdf2go
+
+go home -->  cd $SNAP

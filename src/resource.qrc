@@ -1,0 +1,28 @@
+<RCC>
+  <qresource prefix="myresource">
+    <file>resource/circle-cropped.png</file>
+    <file>resource/icons8-crop-96.png</file>
+    <file>resource/icons8-fast-forward-100.png</file>
+    <file>resource/icons8-google-translate-96.png</file>
+    <file>resource/icons8-home-96.png</file>
+    <file>resource/icons8-in-transit-96.png</file>
+    <file>resource/icons8-male-user-96.png</file>
+    <file>resource/icons8-rewind-100.png</file>
+    <file>resource/icons8-rocket-128.png</file>
+    <file>resource/icons8-search-folder-96 (1).png</file>
+    <file>resource/icons8-tea-96.png</file>
+    <file>resource/sales_and_support.png</file>
+    <file>resource/pdf2go_startup_screen.gif</file>
+    <file>resource/my_plan.png</file>
+    <file>resource/change-theme.png</file>
+    <file>resource/zoom_in.png</file>
+    <file>resource/zoom_out.png</file>
+    <file>resource/rotate_left.png</file>
+    <file>resource/facebook-like.png</file>
+    <file>resource/link.png</file>
+    <file>resource/paypal.png</file>
+    <file>resource/person-growth.png</file>
+    <file>resource/user_blue.png</file>
+    <file>resource/pdf2go.png</file>
+  </qresource>
+</RCC>
