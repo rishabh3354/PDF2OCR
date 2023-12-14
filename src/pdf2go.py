@@ -115,7 +115,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.about_ui.ui.feedback_button.clicked.connect(self.redirect_to_feedback_button)
 
     def redirect_to_warlordsoft(self):
-        warlord_soft_link = "https://warlordsoftwares.in/"
+        warlord_soft_link = "https://warlordsoftwares.com/"
         webbrowser.open(warlord_soft_link)
 
     def redirect_to_paypal_donation(self):
@@ -126,7 +126,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         QDesktopServices.openUrl(QUrl("snap://y2mate"))
 
     def redirect_to_feedback_button(self):
-        feedback_link = "https://warlordsoftwares.in/contact_us/"
+        feedback_link = "https://warlordsoftwares.com/contact_us/"
         webbrowser.open(feedback_link)
 
     def zoom_in_functionality(self):
@@ -722,7 +722,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     # def purchase_now(self):
     #     if self.login_ui.ui.log_out_button_obj_2.isVisible():
     #         token = check_for_local_token()
-    #         warlord_soft_link = f"https://warlordsoftwares.in/warlord_soft/subscription/?product={PRODUCT_NAME}&token={token} "
+    #         warlord_soft_link = f"https://warlordsoftwares.com/warlord_soft/subscription/?product={PRODUCT_NAME}&token={token} "
     #         webbrowser.open(warlord_soft_link)
     #     else:
     #         for i in range(self.login_ui.ui.your_plan_gridLayout.count() - 1, -1, -1):
@@ -815,7 +815,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     #         self.login_ui.ui.register_progressBar.setVisible(False)
     #         self.show_your_plan_page(data)
     #         token = check_for_local_token()
-    #         warlord_soft_link = f"https://warlordsoftwares.in/warlord_soft/subscription/?product={PRODUCT_NAME}&token={token} "
+    #         warlord_soft_link = f"https://warlordsoftwares.com/warlord_soft/subscription/?product={PRODUCT_NAME}&token={token} "
     #         webbrowser.open(warlord_soft_link)
     #     else:
     #         error_message = data.get("message")
@@ -950,7 +950,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     #     self.login_thread.start()
     #
     # def redirect_to_warlord_softwares(self):
-    #     warlord_soft_link = "https://warlordsoftwares.in/"
+    #     warlord_soft_link = "https://warlordsoftwares.com/"
     #     webbrowser.open(warlord_soft_link)
 
     #  ==============================Login code ends==================================================
