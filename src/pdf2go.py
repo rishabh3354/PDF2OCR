@@ -119,14 +119,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         webbrowser.open(warlord_soft_link)
 
     def redirect_to_paypal_donation(self):
-        paypal_donation_link = "https://www.paypal.com/paypalme/rishabh3354/5"
+        paypal_donation_link = "https://www.paypal.com/paypalme/rishabh3354/10"
         webbrowser.open(paypal_donation_link)
 
     def redirect_to_rate_snapstore(self):
-        QDesktopServices.openUrl(QUrl("snap://y2mate"))
+        QDesktopServices.openUrl(QUrl("snap://pdf2go"))
 
     def redirect_to_feedback_button(self):
-        feedback_link = "https://warlordsoftwares.com/contact_us/"
+        feedback_link = "https://warlordsoftwares.com/contact-us/"
         webbrowser.open(feedback_link)
 
     def zoom_in_functionality(self):
@@ -722,7 +722,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     # def purchase_now(self):
     #     if self.login_ui.ui.log_out_button_obj_2.isVisible():
     #         token = check_for_local_token()
-    #         warlord_soft_link = f"https://warlordsoftwares.com/warlord_soft/subscription/?product={PRODUCT_NAME}&token={token} "
+    #         warlord_soft_link = f"https://warlordsoftwares.com/apps/plans-and-pricing/?product={PRODUCT_NAME}&token={token} "
     #         webbrowser.open(warlord_soft_link)
     #     else:
     #         for i in range(self.login_ui.ui.your_plan_gridLayout.count() - 1, -1, -1):
@@ -815,7 +815,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     #         self.login_ui.ui.register_progressBar.setVisible(False)
     #         self.show_your_plan_page(data)
     #         token = check_for_local_token()
-    #         warlord_soft_link = f"https://warlordsoftwares.com/warlord_soft/subscription/?product={PRODUCT_NAME}&token={token} "
+    #         warlord_soft_link = f"https://warlordsoftwares.com/apps/plans-and-pricing/?product={PRODUCT_NAME}&token={token} "
     #         webbrowser.open(warlord_soft_link)
     #     else:
     #         error_message = data.get("message")
