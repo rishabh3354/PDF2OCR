@@ -76,7 +76,7 @@ parts:
           - googletrans==4.0.0rc1
           - pytesseract
           - pdf2image
-          - PyPDF2
+          - PyPDF2<3.0
           - requests
           - cryptography
       build-attributes: [ keep-execstack ]
