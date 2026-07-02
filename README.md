@@ -1,50 +1,40 @@
-**IMPORTANT NOTE :#**
-
-**IF APP IS NOT LAUNCHING AFTER INSTALL, THEN RUN CMD BELOW IN YOUR SHELL.****
-
-    sudo snap remove pdf2go && sudo snap install pdf2go && sudo snap refresh pdf2go && sudo snap install pyqt5-runtime-lite && sudo snap refresh pyqt5-runtime-lite && pdf2go
-    
-***FYI:***  *Be Patient, Sometimes Snap Applications Takes A While To Launch At First Time Installations*
-
-------------------------------------------------------------------------------------------------------------------------------------
-
 **ABOUT APPLICATION :**
 
-**PDF2OCR** is a linux based desktop application for converting image/pdf into plain text format using **OCR Technology**. 
+**PDF2OCR** is a fast and lightweight Linux desktop application that converts **PDF documents**, **scanned PDFs**, and **image files** into editable plain text using advanced **Tesseract OCR (Optical Character Recognition)** technology.
+
+Whether you're extracting text from scanned documents, invoices, receipts, books, screenshots, or photographs, PDF2OCR provides accurate OCR recognition with a simple and user-friendly interface.
+
+**FEATURES :**
+
+* Extract text from scanned PDF documents and image files using Tesseract OCR.
+* Supports PDF, JPG, JPEG, PNG, BMP, TIFF, GIF, WEBP and many other image formats.
+* Convert single or multiple images into editable text.
+* Extract text from PDF files with an unlimited number of pages.
+* Open local PDF and image files from your computer.
+* Download and process PDF or image files directly from a URL.
+* Export extracted text to a plain text (.txt) file.
+* Translate extracted text into multiple languages.
+* Built-in caching for faster loading and improved performance.
+* Fast, lightweight and easy-to-use desktop interface.
+* Designed for Linux desktops.
 
 
-**FEATURES :** 
+## Install PDF2OCR on Linux Desktop:
 
- - With the OCR Technology, Any image or PDF can be converted into text.
- - File browse option for offline files.
- - URL support for image or PDF files, just enter pdf/image url from
-   web.
- - Export your extracted data in text file within seconds.
- - Translate your data in any language.
- - Cache support for faster render input files.
- - Unlimited Number of Pages in PDF files
- - Multiple selection of Images on one Go. (with file explorer)
+**Snap**
 
-**NOTE  #1**
+[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/pdf2go)
 
-ubuntu-restricted-extras package allows users to install ability to play popular non-free media formats, including DVD, MP3, Quicktime, and Windows Media formats. without this you would not be able to play videos inside the app.
+Install with command-line
 
-    sudo apt-get install ubuntu-restricted-extras
+`snap install pdf2go`
 
+and run
+
+`pdf2go`
 
 **KEYWORDS:** 
 
 *smallpdf, ilovepdf, freepdfconverter, toolpdf24, adobepdf, jpg2pdf, jpgtopdf, imagetopdf, image2pdf, sejda, pdfonline, sodapdf, pdf2go, itextpdf, image converter, convert jpg to pdf, pspdfkit, pdftools, avepdf, foxit, wondershare, pdfresizer, img2go, img2pdf, online2pdf, bigpdf, pdfelement, nitro, jpg2pdf linux, pdf2go*
 
--------------------------------------------------------------------------------------------------------
-
-
-
-**To Install, use cmd:**
-
-    snap install pdf2go
-
-[Get it from Snapstore](https://snapcraft.io/pdf2go)
-
-![enter image description here](https://camo.githubusercontent.com/ab077b20ad9938c23fbdac223ab101df5ed27329bbadbe7f98bfd62d5808f0a7/68747470733a2f2f736e617063726166742e696f2f7374617469632f696d616765732f6261646765732f656e2f736e61702d73746f72652d626c61636b2e737667)
 
