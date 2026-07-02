@@ -89,7 +89,7 @@ class Ui_Dialog(object):
 "</style></head><body style=\" font-family:\'Ubuntu\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\":/myresource/resource/icons8-male-user-96.png\" height=\"50\" /></p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#35a849;\">Developed by: </span><span style=\" font-weight:600; color:#35a849;\">Rishabh Bhardwaj</span></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#35a849;\">Version: </span><span style=\" font-weight:600; color:#35a849;\">4.2 | </span><a href=\"https://snapcraft.io/search?q=rishabh\"><span style=\" font-weight:600; text-decoration: underline; color:#ef2929;\">Get more apps</span></a></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#35a849;\">Version: </span><span style=\" font-weight:600; color:#35a849;\">2026.7.2 | </span><a href=\"https://snapcraft.io/search?q=rishabh\"><span style=\" font-weight:600; text-decoration: underline; color:#ef2929;\">Get more apps</span></a></p>\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; color:#35a849;\"><br /></p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600; color:#35a849;\">Support Request:</span><span style=\" color:#35a849;\">   If you like this Application, then please support the developer by donation. Your donations make me </span><span style=\" font-weight:600; color:#35a849;\">feel motivated</span><span style=\" color:#35a849;\"> to my work. Thanks!  Expect </span><span style=\" font-weight:600; color:#35a849;\">new updates</span><span style=\" color:#35a849;\"> in near future!</span></p>\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; color:#35a849;\"><br /></p>\n"
@@ -103,8 +103,8 @@ class Ui_Dialog(object):
 "</style></head><body style=\" font-family:\'Ubuntu\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\":/myresource/resource/pdf2go.png\" height=\"50\" /></p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600; color:#35a849;\">PDF2OCR FOR LINUX (OCR based free reader)</span></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#35a849;\">Version 4.2</span></p></body></html>"))
-        self.warlordsoft_button.setText(_translate("Dialog", "Visit @Site"))
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#35a849;\">Version 2026.7.2</span></p></body></html>"))
+        self.warlordsoft_button.setText(_translate("Dialog", "Visit website"))
         self.donate_button.setText(_translate("Dialog", "Donate"))
         self.rate_button.setText(_translate("Dialog", "Rate"))
         self.feedback_button.setText(_translate("Dialog", "Feedback"))
