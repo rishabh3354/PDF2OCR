@@ -33,8 +33,7 @@ and run
 
 `pdf2go`
 
-**KEYWORDS:** 
-
-*smallpdf, ilovepdf, freepdfconverter, toolpdf24, adobepdf, jpg2pdf, jpgtopdf, imagetopdf, image2pdf, sejda, pdfonline, sodapdf, pdf2go, itextpdf, image converter, convert jpg to pdf, pspdfkit, pdftools, avepdf, foxit, wondershare, pdfresizer, img2go, img2pdf, online2pdf, bigpdf, pdfelement, nitro, jpg2pdf linux, pdf2go*
-
+<sub><sup>
+keywords: smallpdf, ilovepdf, freepdfconverter, toolpdf24, adobepdf, jpg2pdf, jpgtopdf, imagetopdf, image2pdf, sejda, pdfonline, sodapdf, pdf2go, itextpdf, image converter, convert jpg to pdf, pspdfkit, pdftools, avepdf, foxit, wondershare, pdfresizer, img2go, img2pdf, online2pdf, bigpdf, pdfelement, nitro, jpg2pdf linux, pdf2go
+</sub></sup>
 
