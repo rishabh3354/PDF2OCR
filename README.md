@@ -17,7 +17,6 @@
   <img src="https://img.shields.io/badge/Pages-unlimited-success?style=flat-square" alt="No page limit">
 </p>
 
-> ⭐ If PDF2OCR saved you from retyping a scanned document, [star the repo](https://github.com/rishabh3354/PDF2OCR/stargazers).
 
 ---
 
@@ -185,15 +184,7 @@ Yes. It is MIT licensed — open an [issue](https://github.com/rishabh3354/PDF2O
 
 ## 🧩 More apps by Warlord Softwares
 
-| App | What it does |
-|---|---|
-| **[JPEG2PDF](https://github.com/rishabh3354/JPG2PDF)** | Convert images into high-quality PDF files (MIT licensed) |
-| **[FormatLab](https://github.com/rishabh3354/FORMAT_LAB)** | Convert and compress video and audio between 40+ formats |
-| **[4KTUBE](https://github.com/rishabh3354/4KTUBE)** | Download YouTube videos and playlists in 4K / 8K |
-| **[TUBE2GO](https://github.com/rishabh3354/TUBE2GO)** | One-click YouTube downloader with a built-in system monitor |
-| **[4KWALL](https://github.com/rishabh3354/4KWALL)** | Wallpaper manager with auto-rotation and multi-monitor support |
-
-**Packaging building blocks:** [pyqt5-runtime-core22-lite](https://github.com/rishabh3354/pyqt5-runtime-core22-lite) · [content-snap-core22](https://github.com/rishabh3354/content-snap-core22)
+Other apps by Warlord Softwares are listed on [warlordsoftwares.com](https://warlordsoftwares.com/).
 
 ---
 
@@ -211,9 +202,3 @@ Yes. It is MIT licensed — open an [issue](https://github.com/rishabh3354/PDF2O
 [MIT](src/LICENSE) © Rishabh Bhardwaj / Warlord Softwares.
 
 Built with [PyQt5](https://pypi.org/project/PyQt5/) and [Tesseract OCR](https://github.com/tesseract-ocr/tesseract).
-
----
-
-<p align="center">
-  <strong>Found this useful? ⭐ Star the repo — it genuinely helps other people find it.</strong>
-</p>
