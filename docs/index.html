@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PDF2OCR — Extract Text from Scanned PDFs &amp; Images (Linux OCR)</title>
+<meta name="description" content="Free open-source OCR app for Linux. Extract editable text from scanned PDFs, photos and images with Tesseract, translate it, and export to .txt. Runs offline.">
+<meta name="google-site-verification" content="mL3uAdGxN4UUQe9QNljmbWKse_nSiBQhiplr9p4KsAw">
+<link rel="canonical" href="https://rishabh3354.github.io/PDF2OCR/">
+<meta name="author" content="Warlord Softwares">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Warlord Softwares">
+<meta property="og:title" content="PDF2OCR — Extract Text from Scanned PDFs &amp; Images (Linux OCR)">
+<meta property="og:description" content="Free open-source OCR app for Linux. Extract editable text from scanned PDFs, photos and images with Tesseract, translate it, and export to .txt. Runs offline.">
+<meta property="og:url" content="https://rishabh3354.github.io/PDF2OCR/">
+<meta property="og:image" content="https://raw.githubusercontent.com/rishabh3354/PDF2OCR/master/share/screenshots/pdf2ocr_url_extract.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="PDF2OCR — Extract Text from Scanned PDFs &amp; Images (Linux OCR)">
+<meta name="twitter:description" content="Free open-source OCR app for Linux. Extract editable text from scanned PDFs, photos and images with Tesseract, translate it, and export to .txt. Runs offline.">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/rishabh3354/PDF2OCR/master/share/screenshots/pdf2ocr_url_extract.png">
+<link rel="icon" href="https://raw.githubusercontent.com/rishabh3354/PDF2OCR/master/share/icons/icon.png">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+:root{
+  --bg:#ffffff;--panel:#f6f7f9;--text:#16181d;--muted:#5b6270;--line:#e3e6ea;
+  --accent:#2f7ce5;--code-bg:#f0f2f5;--shadow:0 1px 3px rgba(0,0,0,.07);
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1115;--panel:#171a20;--text:#e9ecf1;--muted:#98a0ae;--line:#252a33;
+        --code-bg:#1c2028;--shadow:0 1px 3px rgba(0,0,0,.4)}
+}
+:root[data-theme="dark"]{--bg:#0f1115;--panel:#171a20;--text:#e9ecf1;--muted:#98a0ae;
+  --line:#252a33;--code-bg:#1c2028;--shadow:0 1px 3px rgba(0,0,0,.4)}
+:root[data-theme="light"]{--bg:#ffffff;--panel:#f6f7f9;--text:#16181d;--muted:#5b6270;
+  --line:#e3e6ea;--code-bg:#f0f2f5;--shadow:0 1px 3px rgba(0,0,0,.07)}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);
+  font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:960px;margin:0 auto;padding:0 1.25rem}
+header.hero{padding:3.5rem 0 2.5rem;text-align:center;border-bottom:1px solid var(--line)}
+h1{font-size:clamp(1.75rem,4.5vw,2.6rem);line-height:1.2;letter-spacing:-.02em;margin:0 0 .6rem}
+.sub{color:var(--muted);font-size:clamp(1rem,2.2vw,1.15rem);max-width:44rem;margin:0 auto 1.75rem}
+.banner{border-radius:12px;border:1px solid var(--line);box-shadow:var(--shadow);margin:0 0 2rem}
+.badges{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center;margin:0 0 1.75rem}
+.badges img{display:inline-block}
+.cta{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center}
+.btn{display:inline-block;padding:.7rem 1.3rem;border-radius:8px;font-weight:600;font-size:.95rem;
+  border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.btn:hover{text-decoration:none;border-color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+section{padding:3rem 0;border-bottom:1px solid var(--line)}
+h2{font-size:clamp(1.3rem,3vw,1.7rem);letter-spacing:-.01em;margin:0 0 1.25rem}
+h3{font-size:1.02rem;margin:0 0 .35rem}
+.grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:1.1rem 1.2rem}
+.card p{margin:0;color:var(--muted);font-size:.93rem}
+.card h3{color:var(--text)}
+pre{background:var(--code-bg);border:1px solid var(--line);border-radius:8px;padding:.85rem 1rem;
+  overflow-x:auto;margin:.5rem 0 0}
+code{font:.88rem/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+dl.ref{margin:0;display:grid;gap:.9rem}
+dl.ref dt{font-weight:600;font-size:.9rem;color:var(--accent);text-transform:uppercase;letter-spacing:.06em}
+dl.ref dd{margin:.25rem 0 0;color:var(--muted);font-size:.95rem;word-spacing:.1em}
+.shots{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.shots img{border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)}
+details{background:var(--panel);border:1px solid var(--line);border-radius:10px;
+  padding:.9rem 1.1rem;margin:0 0 .6rem}
+details summary{cursor:pointer;font-weight:600;list-style:none}
+details summary::-webkit-details-marker{display:none}
+details summary::after{content:"+";float:right;color:var(--accent);font-weight:700}
+details[open] summary::after{content:"\2212"}
+details p{margin:.7rem 0 0;color:var(--muted);font-size:.95rem}
+.notice{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);
+  border-radius:8px;padding:1rem 1.2rem;color:var(--muted);font-size:.93rem}
+footer{padding:2.5rem 0 3.5rem;color:var(--muted);font-size:.9rem}
+footer a{color:var(--muted);text-decoration:underline}
+footer nav{margin:0 0 1rem;display:flex;flex-wrap:wrap;gap:1rem}
+.tbl{width:100%;border-collapse:collapse;font-size:.94rem}
+.tbl th,.tbl td{text-align:left;padding:.6rem .7rem;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl th{color:var(--accent);font-size:.8rem;text-transform:uppercase;letter-spacing:.06em}
+.tbl td:first-child{font-weight:600;white-space:nowrap}
+.tbl td:last-child{color:var(--muted)}
+.scroll{overflow-x:auto}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"PDF2OCR","applicationCategory":"UtilitiesApplication","operatingSystem":"Linux, Windows 10, Windows 11","description":"Free open-source OCR app for Linux. Extract editable text from scanned PDFs, photos and images with Tesseract, translate it, and export to .txt. Runs offline.","url":"https://rishabh3354.github.io/PDF2OCR/","downloadUrl":"https://snapcraft.io/pdf2go","screenshot":"https://raw.githubusercontent.com/rishabh3354/PDF2OCR/master/share/screenshots/pdf2ocr_url_extract.png","softwareVersion":"latest","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"Warlord Softwares","url":"https://warlordsoftwares.com/"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is PDF2OCR free?","acceptedAnswer":{"@type":"Answer","text":"Yes. It is free to install from the Snap Store, and the source is MIT licensed."}},{"@type":"Question","name":"Does it send my documents anywhere?","acceptedAnswer":{"@type":"Answer","text":"OCR runs locally with Tesseract on your own machine, so scanned documents stay on your computer. The optional translate feature and opening a file by URL do use the network."}},{"@type":"Question","name":"What file types can it read?","acceptedAnswer":{"@type":"Answer","text":"PDF files, including scanned and multi-page PDFs, plus JPG, JPEG, PNG, BMP, TIFF, GIF and WebP images."}},{"@type":"Question","name":"Is there a page limit?","acceptedAnswer":{"@type":"Answer","text":"No. It handles PDFs with an unlimited number of pages."}},{"@type":"Question","name":"Can it translate the extracted text?","acceptedAnswer":{"@type":"Answer","text":"Yes \u2014 the recognised text can be translated into another language inside the app."}},{"@type":"Question","name":"How accurate is the OCR?","acceptedAnswer":{"@type":"Answer","text":"It uses Tesseract, so accuracy depends on the source. Clean 300 DPI scans read very well; low-resolution photos and unusual fonts read less well."}},{"@type":"Question","name":"Can I export the text?","acceptedAnswer":{"@type":"Answer","text":"Yes, as a plain text (.txt) file."}},{"@type":"Question","name":"Why is the snap called pdf2go?","acceptedAnswer":{"@type":"Answer","text":"The application shipped under the name PDF2Go before it was renamed, and the snap name cannot be changed without losing existing installs. `snap install pdf2go` is correct."}},{"@type":"Question","name":"Is it available for Windows or macOS?","acceptedAnswer":{"@type":"Answer","text":"Not currently \u2014 the packaged build is Linux only. The source is Python and PyQt5, so it may run elsewhere, but that is untested."}}]}</script>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>PDF2OCR — Extract Text from Scanned PDFs &amp; Images (Linux OCR)</h1>
+    <p class="sub">Turn scanned PDFs, photos and screenshots into editable text using Tesseract OCR. Open files from your computer or straight from a URL, page through multi-page documents, translate the extracted text, and export it as plain text. Open source under the MIT licence.</p>
+    <div class="badges">
+      <img src="https://img.shields.io/snapcraft/v/pdf2go/latest/stable?style=flat-square&label=Snap&color=E95420" alt="Snap Store version" height="20">
+      <img src="https://img.shields.io/github/stars/rishabh3354/PDF2OCR?style=flat-square&color=f5c518" alt="GitHub stars" height="20">
+    </div>
+    <div class="cta">
+      <a class="btn primary" href="https://snapcraft.io/pdf2go">Snap Store</a>
+      <a class="btn" href="https://github.com/rishabh3354/PDF2OCR">GitHub</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section id="screenshot-banner">
+    <div class="wrap">
+      <img class="banner" src="https://raw.githubusercontent.com/rishabh3354/PDF2OCR/master/share/screenshots/pdf2ocr_url_extract.png" alt="PDF2OCR — OCR for Scanned PDFs and Images on Linux" width="1600" height="600">
+    </div>
+  </section>
+
+  <section id="download">
+    <div class="wrap">
+      <h2>Download and install PDF2OCR</h2>
+      <h3>Linux — Snap</h3>
+      <pre><code>sudo snap install pdf2go</code></pre>
+
+        <h3>Run from source</h3>
+        <pre><code>git clone https://github.com/rishabh3354/PDF2OCR.git
+cd PDF2OCR
+python3 src/pdf2go.py</code></pre>
+        <p>The application is MIT licensed — see the
+        <a href="https://github.com/rishabh3354/PDF2OCR">repository</a>.</p>
+    </div>
+  </section>
+
+  <section id="features">
+    <div class="wrap">
+      <h2>Features</h2>
+      <div class="grid">
+        <div class="card"><h3>Tesseract OCR</h3><p>Accurate text recognition from scans, photos and screenshots.</p></div>
+        <div class="card"><h3>Scanned PDFs</h3><p>Extract text from PDF files with an unlimited number of pages.</p></div>
+        <div class="card"><h3>Images too</h3><p>JPG, JPEG, PNG, BMP, TIFF, GIF and WebP.</p></div>
+        <div class="card"><h3>Open from a URL</h3><p>Point it at a remote PDF or image instead of downloading first.</p></div>
+        <div class="card"><h3>Page-by-page</h3><p>Step through a multi-page document and see the text for each page.</p></div>
+        <div class="card"><h3>Translate the output</h3><p>Convert extracted text into another language in the app.</p></div>
+        <div class="card"><h3>Export to .txt</h3><p>Save the recognised text as a plain text file.</p></div>
+        <div class="card"><h3>Caching</h3><p>Previously processed pages load back quickly.</p></div>
+        <div class="card"><h3>Runs offline</h3><p>OCR happens locally — scanned documents never leave your machine.</p></div>
+        <div class="card"><h3>Open source</h3><p>MIT licensed, written in Python and PyQt5.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="reference">
+    <div class="wrap">
+      <h2>Supported input</h2>
+      <dl class="ref">
+        <dt>Documents</dt><dd>PDF · scanned PDF · multi-page PDF</dd>
+        <dt>Images</dt><dd>JPG · JPEG · PNG · BMP · TIFF · GIF · WebP</dd>
+        <dt>Sources</dt><dd>Local files · folders · direct URL</dd>
+        <dt>Output</dt><dd>Editable text on screen · plain text (.txt) export · translated text</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section id="tasks">
+    <div class="wrap">
+      <h2>Common tasks</h2>
+      <div class="scroll">
+        <table class="tbl">
+          <thead><tr><th>Task</th><th>What PDF2OCR does</th></tr></thead>
+          <tbody>
+          <tr><td>Extract text from a scanned PDF</td><td>OCR every page and read the text alongside the original.</td></tr>
+          <tr><td>Convert an image to text</td><td>Drop in a JPG or PNG screenshot and pull the text out.</td></tr>
+          <tr><td>OCR a photographed document</td><td>Works on phone photos of receipts, invoices and pages.</td></tr>
+          <tr><td>Get text from a PDF at a URL</td><td>Paste the link — no separate download step.</td></tr>
+          <tr><td>Save the results</td><td>Export the recognised text to a .txt file.</td></tr>
+          <tr><td>Translate a scanned page</td><td>Extract the text, then translate it in the app.</td></tr>
+          <tr><td>Digitise a book chapter</td><td>Page through a long PDF and collect the text.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="screenshots">
+    <div class="wrap">
+      <h2>Screenshots</h2>
+      <div class="shots">
+        <img src="https://raw.githubusercontent.com/rishabh3354/PDF2OCR/master/share/screenshots/pdf2ocr_url_extract.png" alt="PDF2OCR extracting text from a PDF loaded by URL, original document on the left and recognised text on the right" loading="lazy" width="1200" height="750">
+        <img src="https://raw.githubusercontent.com/rishabh3354/PDF2OCR/master/share/screenshots/pdf2ocr_file_extract.png" alt="PDF2OCR extracting text from a local image file with the output language selector and page navigation" loading="lazy" width="1200" height="750">
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <h2>Frequently asked questions</h2>
+        <details><summary>Is PDF2OCR free?</summary><p>Yes. It is free to install from the Snap Store, and the source is MIT licensed.</p></details>
+        <details><summary>Does it send my documents anywhere?</summary><p>OCR runs locally with Tesseract on your own machine, so scanned documents stay on your computer. The optional translate feature and opening a file by URL do use the network.</p></details>
+        <details><summary>What file types can it read?</summary><p>PDF files, including scanned and multi-page PDFs, plus JPG, JPEG, PNG, BMP, TIFF, GIF and WebP images.</p></details>
+        <details><summary>Is there a page limit?</summary><p>No. It handles PDFs with an unlimited number of pages.</p></details>
+        <details><summary>Can it translate the extracted text?</summary><p>Yes — the recognised text can be translated into another language inside the app.</p></details>
+        <details><summary>How accurate is the OCR?</summary><p>It uses Tesseract, so accuracy depends on the source. Clean 300 DPI scans read very well; low-resolution photos and unusual fonts read less well.</p></details>
+        <details><summary>Can I export the text?</summary><p>Yes, as a plain text (.txt) file.</p></details>
+        <details><summary>Why is the snap called pdf2go?</summary><p>The application shipped under the name PDF2Go before it was renamed, and the snap name cannot be changed without losing existing installs. `snap install pdf2go` is correct.</p></details>
+        <details><summary>Is it available for Windows or macOS?</summary><p>Not currently — the packaged build is Linux only. The source is Python and PyQt5, so it may run elsewhere, but that is untested.</p></details>
+    </div>
+  </section>
+
+  <section id="other-apps">
+    <div class="wrap">
+      <h2>Other apps by Warlord Softwares</h2>
+      <div class="scroll">
+        <table class="tbl">
+          <thead><tr><th>App</th><th>What it does</th></tr></thead>
+          <tbody>
+          <tr><td><a href="https://rishabh3354.github.io/FORMAT_LAB/">FormatLab</a></td><td>Video &amp; Audio Converter for Linux and Windows</td></tr>
+          <tr><td><a href="https://rishabh3354.github.io/4KTUBE/">4KTUBE</a></td><td>YouTube Downloader for Linux and Windows</td></tr>
+          <tr><td><a href="https://rishabh3354.github.io/4KWALL/">4KWALL</a></td><td>Wallpaper Manager &amp; Auto Wallpaper Changer</td></tr>
+          <tr><td><a href="https://rishabh3354.github.io/YOUTUBE-DL-PRO/">DL-YouTube</a></td><td>Media Downloader for 1400+ Sites</td></tr>
+          <tr><td><a href="https://rishabh3354.github.io/TUBE2GO/">TUBE2GO</a></td><td>One-Click YouTube Downloader with System Monitor</td></tr>
+          <tr><td><a href="https://rishabh3354.github.io/JPG2PDF/">JPEG2PDF</a></td><td>Image to PDF Converter for Linux</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <nav>
+      <a href="https://github.com/rishabh3354/PDF2OCR">GitHub repository</a>
+      <a href="https://github.com/rishabh3354/PDF2OCR/releases/latest">Releases</a>
+      <a href="https://github.com/rishabh3354/PDF2OCR/issues">Report an issue</a>
+      <a href="https://snapcraft.io/pdf2go">Snap Store</a>
+      <a href="https://warlordsoftwares.com/">Website</a>
+      <a href="https://warlordsoftwares.com/privacy-policy/">Privacy policy</a>
+    </nav>
+    <p>PDF2OCR is open source under the <a href="https://github.com/rishabh3354/PDF2OCR/blob/master/src/LICENSE">MIT licence</a>. &copy; 2024&ndash;2026 Rishabh Bhardwaj / Warlord Softwares.</p>
+  </div>
+</footer>
+
+</body>
+</html>
