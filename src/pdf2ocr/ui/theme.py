@@ -5,14 +5,11 @@ import os
 import subprocess
 import tempfile
 
-from PyQt5.QtCore import QByteArray, QRectF, Qt
+from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QColor, QIcon, QPainter, QPalette, QPixmap
 from PyQt5.QtWidgets import QApplication, QStyleFactory
 
-try:
-    from PyQt5.QtSvg import QSvgRenderer
-except ImportError:  # very minimal Qt runtimes; buttons still show text
-    QSvgRenderer = None
+from .icon_paint import paint_icon
 
 LIGHT = {
     "bg": "#F4F5F7", "surface": "#FFFFFF", "surface2": "#ECEEF2", "hover": "#E4E7EC",
@@ -127,15 +124,12 @@ class Theme:
         scale = scale or QApplication.instance().devicePixelRatio() or 1
         pixmap = QPixmap(int(size * scale), int(size * scale))
         pixmap.fill(Qt.transparent)
-        if QSvgRenderer is None or name not in _ICONS:
+        if name not in _ICONS:
             return pixmap
-        svg = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" '
-               f'stroke="{color}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'
-               f'{_ICONS[name]}</svg>')
-        renderer = QSvgRenderer(QByteArray(svg.encode()))
+        # Drawn with QPainter rather than QtSvg, which the snap's PyQt5 runtime lacks.
         painter = QPainter(pixmap)
         painter.setRenderHint(QPainter.Antialiasing)
-        renderer.render(painter, QRectF(0, 0, pixmap.width(), pixmap.height()))
+        paint_icon(painter, _ICONS[name], QColor(color), pixmap.width())
         painter.end()
         pixmap.setDevicePixelRatio(scale)
         return pixmap
