@@ -1,6 +1,6 @@
 """Page image viewer with zoom, fit-to-window, rotation and area selection."""
 
-from PyQt5.QtCore import QPointF, QRectF, Qt, pyqtSignal
+from PyQt5.QtCore import QPointF, QRect, QRectF, Qt, pyqtSignal
 from PyQt5.QtGui import QColor, QPainter, QPainterPath, QPen, QPixmap
 from PyQt5.QtWidgets import (QComboBox, QFrame, QGraphicsEllipseItem, QGraphicsItem, QGraphicsPathItem,
                              QGraphicsPixmapItem, QGraphicsRectItem, QPushButton,
@@ -414,7 +414,7 @@ class AreaResultCard(QFrame):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setObjectName("Card")
-        self.setFixedWidth(340)
+        self.setFixedWidth(390)
         layout = QVBoxLayout(self)
         layout.setContentsMargins(14, 10, 8, 12)
         layout.setSpacing(8)
@@ -613,12 +613,12 @@ class ViewerPanel(QWidget):
         self.place_overlays()
 
     def _card_position(self):
-        """Just below the selection, or above it, never covering it."""
+        """Just below or above the selection; when neither fits, wherever it
+        covers the least of the selection."""
         card, margin = self.card.size(), 10
-        fallback = (max(8, self.width() - card.width() - 14), 14)
         band = self.viewer._band
         if band is None:
-            return fallback
+            return max(8, self.width() - card.width() - 14), 14
         rect = self.viewer.mapFromScene(band.rect()).boundingRect()
         x = min(max(8, rect.left()), self.width() - card.width() - 8)
         bottom_limit = self.toolbar.geometry().top() - margin
@@ -626,7 +626,16 @@ class ViewerPanel(QWidget):
             return x, rect.bottom() + margin
         if rect.top() - margin - card.height() >= 8:
             return x, rect.top() - margin - card.height()
-        return fallback
+        candidates = [(x, 8), (x, max(8, bottom_limit - card.height()))]
+        if rect.right() + margin + card.width() <= self.width() - 8:
+            candidates.append((rect.right() + margin, max(8, rect.top())))
+        if rect.left() - margin - card.width() >= 8:
+            candidates.append((rect.left() - margin - card.width(), max(8, rect.top())))
+
+        def covered(position):
+            area = QRect(position[0], position[1], card.width(), card.height()).intersected(rect)
+            return area.width() * area.height() if area.isValid() else 0
+        return min(candidates, key=covered)
 
     def place_overlays(self):
         self.viewer.setGeometry(self.rect())

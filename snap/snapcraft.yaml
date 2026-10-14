@@ -1,27 +1,52 @@
 name: pdf2go
 base: core22
 version: '2026.10.1'
-summary: Offline OCR - turn PDFs, scans, images and screenshots into text
+title: PDF2OCR
+summary: "Offline OCR: turn scanned PDFs, photos and screenshots into editable text"
 description: |
-  PDF2OCR extracts editable text from scanned PDFs, images, photos and
-  screenshots using Tesseract OCR. Everything runs on your computer - files are
-  never uploaded, and the recognized text is never translated or rewritten.
+  PDF2OCR turns scanned PDFs, photographed pages, images and screenshots into
+  text you can edit, search, copy and save. Recognition runs entirely on your
+  computer with Tesseract OCR: your documents are never uploaded, and the text
+  is never translated or rewritten - you get exactly what is on the page.
 
-  * Recognize whole documents at once, several pages in parallel
-  * Choose the document language(s); 15 included, 100+ more downloadable
-  * Exact text from digital PDFs, OCR only where needed
-  * Straightens sideways, upside-down and tilted pages; flattens photographed pages
-  * Paste screenshots, capture a screen area, or press a shortcut anywhere to
-    copy text from the screen ("pdf2go --capture")
-  * Scan straight from your scanner (USB or network, including document feeders)
-  * Select an area to read just that part, or a table to copy as spreadsheet cells
-  * Page image and text are linked word by word; uncertain words are flagged
-  * Find & replace across all pages; work is saved automatically
-  * Export to TXT, Markdown, Word, LibreOffice, searchable PDF, Excel or CSV
-  * Batch conversion from the command line: pdf2go --to pdf ~/Scans
+  **Read whole documents at once**
+  * Open PDFs, multi-page TIFFs and images, whole folders, or drag them in
+  * All pages are recognized in parallel, with progress and a Stop button
+  * Digital PDFs keep their exact text; OCR is only used where it is needed
+  * Pick the languages of your document: 15 built in, 100+ more in one click
+
+  **Clean results from imperfect sources**
+  * Sideways, upside-down and slightly tilted pages are straightened automatically
+  * Photographed pages are flattened: the page corners are found for you
+  * Optional cleanup for faded scans, coloured paper, specks and small screenshots
+  * Words that may be misread are flagged in the text and on the page
+
+  **Get just what you need**
+  * Select an area of a page to read only that part
+  * Copy a table and paste it straight into LibreOffice Calc or Excel as cells
+  * Page image and text are linked word by word for quick proofreading
+  * Find & replace across all pages
+
+  **From anywhere**
+  * Paste a screenshot, or capture an area of the screen
+  * Quick capture: press a keyboard shortcut anywhere and the text of the
+    selected area lands on your clipboard (pdf2go --capture)
+  * Scan directly from USB and network scanners, including document feeders
+
+  **Save it your way**
+  * Searchable PDF, Word, LibreOffice, Markdown, plain text, Excel and CSV
+  * Your work is saved automatically and comes back after a restart or crash
+  * Batch conversion from the terminal: pdf2go --to pdf ~/Scans
+
+  Free and open source (MIT).
 
   USB scanners need a one-time permission: sudo snap connect pdf2go:raw-usb
-
+license: MIT
+website: https://warlordsoftwares.com/
+source-code: https://github.com/rishabh3354/PDF2OCR
+issues: https://github.com/rishabh3354/PDF2OCR/issues
+contact: https://warlordsoftwares.com/contact-us/
+donation: https://www.paypal.com/paypalme/rishabh3354/10
 confinement: strict
 
 icon: snap/gui/icon.png
