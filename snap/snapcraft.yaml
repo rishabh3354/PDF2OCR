@@ -1,8 +1,27 @@
 name: pdf2go
 base: core22
-version: '2026.7.2'
-summary: Convert pdf or image into text using OCR
-description: A linux based desktop application for converting image/pdf into plain text format using OCR
+version: '2026.10.1'
+summary: Offline OCR - turn PDFs, scans, images and screenshots into text
+description: |
+  PDF2OCR extracts editable text from scanned PDFs, images, photos and
+  screenshots using Tesseract OCR. Everything runs on your computer - files are
+  never uploaded, and the recognized text is never translated or rewritten.
+
+  * Recognize whole documents at once, several pages in parallel
+  * Choose the document language(s); 15 included, 100+ more downloadable
+  * Exact text from digital PDFs, OCR only where needed
+  * Straightens sideways, upside-down and tilted pages; flattens photographed pages
+  * Paste screenshots, capture a screen area, or press a shortcut anywhere to
+    copy text from the screen ("pdf2go --capture")
+  * Scan straight from your scanner (USB or network, including document feeders)
+  * Select an area to read just that part, or a table to copy as spreadsheet cells
+  * Page image and text are linked word by word; uncertain words are flagged
+  * Find & replace across all pages; work is saved automatically
+  * Export to TXT, Markdown, Word, LibreOffice, searchable PDF, Excel or CSV
+  * Batch conversion from the command line: pdf2go --to pdf ~/Scans
+
+  USB scanners need a one-time permission: sudo snap connect pdf2go:raw-usb
+
 confinement: strict
 
 icon: snap/gui/icon.png
@@ -30,10 +49,18 @@ apps:
        - opengl
        - optical-drive
        - removable-media
+       # Scanning: USB scanners need `snap connect pdf2go:raw-usb` (not auto-connected);
+       # network scanners are found through Avahi.
+       - raw-usb
+       - hardware-observe
+       - avahi-observe
     desktop: pdf2go.desktop
     environment:
       TESSDATA_PREFIX: $SNAP/usr/share/tesseract-ocr/4.00/tessdata
       DISABLE_WAYLAND: 1
+      # The bundled Qt runtime has no Wayland plugin. Override any user-wide
+      # QT_QPA_PLATFORM=wayland(-egl), which otherwise aborts at start-up.
+      QT_QPA_PLATFORM: xcb
 
 plugs:
   gsettings:
@@ -74,12 +101,31 @@ parts:
       plugin: python
       source: .
       python-packages: 
-          - googletrans==4.0.0rc1
-          - pytesseract
-          - pdf2image
-          - PyPDF2<3.0
-          - requests
-          - cryptography
+          - Pillow
+          - pypdf>=4.0
       stage-packages:
         - poppler-utils
         - tesseract-ocr
+        # Scanning (SANE). sane-airscan drives most network scanners without vendor drivers.
+        - sane-utils
+        - libsane1
+        - sane-airscan
+        # Lets the app add its quick-capture keyboard shortcut on GNOME.
+        - dconf-cli
+        - tesseract-ocr-osd
+        # Bundled languages; users can download any other one from inside the app.
+        - tesseract-ocr-eng
+        - tesseract-ocr-deu
+        - tesseract-ocr-fra
+        - tesseract-ocr-spa
+        - tesseract-ocr-ita
+        - tesseract-ocr-por
+        - tesseract-ocr-nld
+        - tesseract-ocr-pol
+        - tesseract-ocr-rus
+        - tesseract-ocr-ukr
+        - tesseract-ocr-tur
+        - tesseract-ocr-ara
+        - tesseract-ocr-hin
+        - tesseract-ocr-chi-sim
+        - tesseract-ocr-jpn
