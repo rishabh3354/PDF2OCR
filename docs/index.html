@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>PDF2OCR — Extract Text from Scanned PDFs &amp; Images (Linux OCR)</title>
-<meta name="description" content="Free open-source OCR app for Linux. Extract editable text from scanned PDFs, photos and images with Tesseract, translate it, and export to .txt. Runs offline.">
+<meta name="description" content="Free, open-source offline OCR for Linux. Turn scanned PDFs, photos and screenshots into editable text, searchable PDF, Word or Excel with Tesseract.">
 <meta name="google-site-verification" content="mL3uAdGxN4UUQe9QNljmbWKse_nSiBQhiplr9p4KsAw">
 <link rel="canonical" href="https://rishabh3354.github.io/PDF2OCR/">
 <meta name="author" content="Warlord Softwares">
@@ -12,13 +12,13 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Warlord Softwares">
 <meta property="og:title" content="PDF2OCR — Extract Text from Scanned PDFs &amp; Images (Linux OCR)">
-<meta property="og:description" content="Free open-source OCR app for Linux. Extract editable text from scanned PDFs, photos and images with Tesseract, translate it, and export to .txt. Runs offline.">
+<meta property="og:description" content="Free, open-source offline OCR for Linux. Turn scanned PDFs, photos and screenshots into editable text, searchable PDF, Word or Excel with Tesseract.">
 <meta property="og:url" content="https://rishabh3354.github.io/PDF2OCR/">
-<meta property="og:image" content="https://raw.githubusercontent.com/rishabh3354/PDF2OCR/master/share/screenshots/pdf2ocr_url_extract.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/rishabh3354/PDF2OCR/master/share/screenshots/01-scan-to-text.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="PDF2OCR — Extract Text from Scanned PDFs &amp; Images (Linux OCR)">
-<meta name="twitter:description" content="Free open-source OCR app for Linux. Extract editable text from scanned PDFs, photos and images with Tesseract, translate it, and export to .txt. Runs offline.">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/rishabh3354/PDF2OCR/master/share/screenshots/pdf2ocr_url_extract.png">
+<meta name="twitter:description" content="Free, open-source offline OCR for Linux. Turn scanned PDFs, photos and screenshots into editable text, searchable PDF, Word or Excel with Tesseract.">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/rishabh3354/PDF2OCR/master/share/screenshots/01-scan-to-text.png">
 <link rel="icon" href="https://raw.githubusercontent.com/rishabh3354/PDF2OCR/master/share/icons/icon.png">
 <style>
 *,*::before,*::after{box-sizing:border-box}
@@ -86,15 +86,15 @@ footer nav{margin:0 0 1rem;display:flex;flex-wrap:wrap;gap:1rem}
 .tbl td:last-child{color:var(--muted)}
 .scroll{overflow-x:auto}
 </style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"PDF2OCR","applicationCategory":"UtilitiesApplication","operatingSystem":"Linux, Windows 10, Windows 11","description":"Free open-source OCR app for Linux. Extract editable text from scanned PDFs, photos and images with Tesseract, translate it, and export to .txt. Runs offline.","url":"https://rishabh3354.github.io/PDF2OCR/","downloadUrl":"https://snapcraft.io/pdf2go","screenshot":"https://raw.githubusercontent.com/rishabh3354/PDF2OCR/master/share/screenshots/pdf2ocr_url_extract.png","softwareVersion":"latest","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"Warlord Softwares","url":"https://warlordsoftwares.com/"}}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is PDF2OCR free?","acceptedAnswer":{"@type":"Answer","text":"Yes. It is free to install from the Snap Store, and the source is MIT licensed."}},{"@type":"Question","name":"Does it send my documents anywhere?","acceptedAnswer":{"@type":"Answer","text":"OCR runs locally with Tesseract on your own machine, so scanned documents stay on your computer. The optional translate feature and opening a file by URL do use the network."}},{"@type":"Question","name":"What file types can it read?","acceptedAnswer":{"@type":"Answer","text":"PDF files, including scanned and multi-page PDFs, plus JPG, JPEG, PNG, BMP, TIFF, GIF and WebP images."}},{"@type":"Question","name":"Is there a page limit?","acceptedAnswer":{"@type":"Answer","text":"No. It handles PDFs with an unlimited number of pages."}},{"@type":"Question","name":"Can it translate the extracted text?","acceptedAnswer":{"@type":"Answer","text":"Yes \u2014 the recognised text can be translated into another language inside the app."}},{"@type":"Question","name":"How accurate is the OCR?","acceptedAnswer":{"@type":"Answer","text":"It uses Tesseract, so accuracy depends on the source. Clean 300 DPI scans read very well; low-resolution photos and unusual fonts read less well."}},{"@type":"Question","name":"Can I export the text?","acceptedAnswer":{"@type":"Answer","text":"Yes, as a plain text (.txt) file."}},{"@type":"Question","name":"Why is the snap called pdf2go?","acceptedAnswer":{"@type":"Answer","text":"The application shipped under the name PDF2Go before it was renamed, and the snap name cannot be changed without losing existing installs. `snap install pdf2go` is correct."}},{"@type":"Question","name":"Is it available for Windows or macOS?","acceptedAnswer":{"@type":"Answer","text":"Not currently \u2014 the packaged build is Linux only. The source is Python and PyQt5, so it may run elsewhere, but that is untested."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"PDF2OCR","applicationCategory":"UtilitiesApplication","operatingSystem":"Linux","description":"Free, open-source offline OCR for Linux. Turn scanned PDFs, photos and screenshots into editable text, searchable PDF, Word or Excel with Tesseract.","url":"https://rishabh3354.github.io/PDF2OCR/","downloadUrl":"https://snapcraft.io/pdf2go","screenshot":["https://raw.githubusercontent.com/rishabh3354/PDF2OCR/master/share/screenshots/01-scan-to-text.png","https://raw.githubusercontent.com/rishabh3354/PDF2OCR/master/share/screenshots/02-copy-area-and-tables.png","https://raw.githubusercontent.com/rishabh3354/PDF2OCR/master/share/screenshots/03-straighten-photos.png","https://raw.githubusercontent.com/rishabh3354/PDF2OCR/master/share/screenshots/04-languages.png","https://raw.githubusercontent.com/rishabh3354/PDF2OCR/master/share/screenshots/05-export.png"],"softwareVersion":"2026.10.1","license":"https://opensource.org/licenses/MIT","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"Warlord Softwares","url":"https://warlordsoftwares.com/"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is PDF2OCR free?","acceptedAnswer":{"@type":"Answer","text":"Yes. It is free to install from the Snap Store, and the source is MIT licensed."}},{"@type":"Question","name":"Does it send my documents anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. OCR runs locally with Tesseract on your own machine and works without an internet connection. The network is only used if you open a file from a URL or download an additional OCR language."}},{"@type":"Question","name":"What file types can it read?","acceptedAnswer":{"@type":"Answer","text":"PDF files, including scanned and multi-page PDFs, plus JPG, JPEG, PNG, BMP, TIFF (multi-page too), GIF and WebP images. It can also take screenshots from the clipboard or the screen, and scan directly from USB and network scanners."}},{"@type":"Question","name":"Which languages does it recognise?","acceptedAnswer":{"@type":"Answer","text":"15 languages are included, among them English, German, French, Spanish, Italian, Portuguese, Dutch, Polish, Russian, Ukrainian, Turkish, Arabic, Hindi, Chinese and Japanese. More than 100 others can be downloaded inside the app. Pick every language in your document for the best results."}},{"@type":"Question","name":"Is there a page limit?","acceptedAnswer":{"@type":"Answer","text":"No. It handles documents with any number of pages and recognises several pages in parallel."}},{"@type":"Question","name":"How accurate is the OCR?","acceptedAnswer":{"@type":"Answer","text":"It uses Tesseract, so accuracy depends on the source. Clean 300 DPI scans read very well. PDF2OCR straightens tilted pages and phone photos, keeps the exact text of digital PDFs, and flags words it is unsure about so you know what to check. Heavy blur, tiny print and handwriting remain hard."}},{"@type":"Question","name":"What can I export to?","acceptedAnswer":{"@type":"Answer","text":"Searchable PDF, Word (.docx), LibreOffice (.odt), Markdown, plain text, and Excel (.xlsx) or CSV for tables. You can also copy all text, or copy a table straight into a spreadsheet."}},{"@type":"Question","name":"Does it translate or change the text?","acceptedAnswer":{"@type":"Answer","text":"No. Earlier versions offered translation, which could silently change the recognised text. PDF2OCR now gives you exactly what the OCR engine read."}},{"@type":"Question","name":"Can I use it from the command line?","acceptedAnswer":{"@type":"Answer","text":"Yes. For example, pdf2go --to pdf ~/Scans turns a folder of scans into searchable PDFs without opening a window, and pdf2go --capture copies the text of a screen area to the clipboard."}},{"@type":"Question","name":"Why is the snap called pdf2go?","acceptedAnswer":{"@type":"Answer","text":"The application shipped under the name PDF2Go before it was renamed, and the snap name cannot be changed without losing existing installs. snap install pdf2go is correct."}},{"@type":"Question","name":"Is it available for Windows or macOS?","acceptedAnswer":{"@type":"Answer","text":"Not currently. The packaged build is Linux only. The source is Python and PyQt5, so it may run elsewhere, but that is untested."}}]}</script>
 </head>
 <body>
 
 <header class="hero">
   <div class="wrap">
     <h1>PDF2OCR — Extract Text from Scanned PDFs &amp; Images (Linux OCR)</h1>
-    <p class="sub">Turn scanned PDFs, photos and screenshots into editable text using Tesseract OCR. Open files from your computer or straight from a URL, page through multi-page documents, translate the extracted text, and export it as plain text. Open source under the MIT licence.</p>
+    <p class="sub">Turn scanned PDFs, photographed pages and screenshots into editable text with Tesseract OCR. Recognise whole documents at once, straighten tilted scans and phone photos, copy tables into a spreadsheet, and export to searchable PDF, Word or Excel. Everything runs offline on your own computer. Open source under the MIT licence.</p>
     <div class="badges">
       <img src="https://img.shields.io/snapcraft/v/pdf2go/latest/stable?style=flat-square&label=Snap&color=E95420" alt="Snap Store version" height="20">
       <img src="https://img.shields.io/github/stars/rishabh3354/PDF2OCR?style=flat-square&color=f5c518" alt="GitHub stars" height="20">
@@ -109,7 +109,7 @@ footer nav{margin:0 0 1rem;display:flex;flex-wrap:wrap;gap:1rem}
 <main>
   <section id="screenshot-banner">
     <div class="wrap">
-      <img class="banner" src="https://raw.githubusercontent.com/rishabh3354/PDF2OCR/master/share/screenshots/pdf2ocr_url_extract.png" alt="PDF2OCR — OCR for Scanned PDFs and Images on Linux" width="1600" height="600">
+      <img class="banner" src="https://raw.githubusercontent.com/rishabh3354/PDF2OCR/master/share/screenshots/01-scan-to-text.png" alt="PDF2OCR showing a scanned three-page report: page thumbnails, the original page, and the recognised text with a word highlighted in both" width="1920" height="1080">
     </div>
   </section>
 
@@ -118,11 +118,20 @@ footer nav{margin:0 0 1rem;display:flex;flex-wrap:wrap;gap:1rem}
       <h2>Download and install PDF2OCR</h2>
       <h3>Linux — Snap</h3>
       <pre><code>sudo snap install pdf2go</code></pre>
+      <p>Using a USB scanner? Allow access once with <code>sudo snap connect pdf2go:raw-usb</code>.</p>
 
         <h3>Run from source</h3>
-        <pre><code>git clone https://github.com/rishabh3354/PDF2OCR.git
+        <pre><code>sudo apt install python3-pyqt5 tesseract-ocr poppler-utils sane-utils
+git clone https://github.com/rishabh3354/PDF2OCR.git
 cd PDF2OCR
+pip install -r requirements.txt
 python3 src/pdf2go.py</code></pre>
+
+        <h3>From the terminal</h3>
+        <pre><code>pdf2go --to pdf ~/Scans                      # searchable PDFs, no window needed
+pdf2go --to txt --lang deu+eng -o out/ *.pdf # text files
+pdf2go --to xlsx statements/                 # tables to Excel
+pdf2go --capture                             # screen area to clipboard</code></pre>
         <p>The application is MIT licensed — see the
         <a href="https://github.com/rishabh3354/PDF2OCR">repository</a>.</p>
     </div>
@@ -132,28 +141,30 @@ python3 src/pdf2go.py</code></pre>
     <div class="wrap">
       <h2>Features</h2>
       <div class="grid">
-        <div class="card"><h3>Tesseract OCR</h3><p>Accurate text recognition from scans, photos and screenshots.</p></div>
-        <div class="card"><h3>Scanned PDFs</h3><p>Extract text from PDF files with an unlimited number of pages.</p></div>
-        <div class="card"><h3>Images too</h3><p>JPG, JPEG, PNG, BMP, TIFF, GIF and WebP.</p></div>
-        <div class="card"><h3>Open from a URL</h3><p>Point it at a remote PDF or image instead of downloading first.</p></div>
-        <div class="card"><h3>Page-by-page</h3><p>Step through a multi-page document and see the text for each page.</p></div>
-        <div class="card"><h3>Translate the output</h3><p>Convert extracted text into another language in the app.</p></div>
-        <div class="card"><h3>Export to .txt</h3><p>Save the recognised text as a plain text file.</p></div>
-        <div class="card"><h3>Caching</h3><p>Previously processed pages load back quickly.</p></div>
-        <div class="card"><h3>Runs offline</h3><p>OCR happens locally — scanned documents never leave your machine.</p></div>
-        <div class="card"><h3>Open source</h3><p>MIT licensed, written in Python and PyQt5.</p></div>
+        <div class="card"><h3>Whole documents at once</h3><p>Every page is recognised, several in parallel, with progress and a Stop button.</p></div>
+        <div class="card"><h3>Your languages</h3><p>15 built in, 100+ more one click away. German and English in one letter? Pick both.</p></div>
+        <div class="card"><h3>Exact text from digital PDFs</h3><p>Real PDF text is copied as-is; OCR is only used for scanned pages.</p></div>
+        <div class="card"><h3>Straightens pages</h3><p>Sideways, upside-down and tilted scans are corrected automatically before reading.</p></div>
+        <div class="card"><h3>Phone photos</h3><p>Fix perspective: the page corners are found and the photo is flattened into a proper page.</p></div>
+        <div class="card"><h3>Screenshots &amp; quick capture</h3><p>Paste with Ctrl+V, capture a screen area, or press a shortcut anywhere to copy text.</p></div>
+        <div class="card"><h3>Scan directly</h3><p>USB and network scanners, flatbed page by page or the whole document feeder.</p></div>
+        <div class="card"><h3>Select an area</h3><p>Read just part of a page, or copy a table and paste it into a spreadsheet as cells.</p></div>
+        <div class="card"><h3>Check with confidence</h3><p>Text and page are linked word by word; uncertain words are flagged in both.</p></div>
+        <div class="card"><h3>Find &amp; replace</h3><p>Across all pages, with undo. Your work is saved automatically and survives a crash.</p></div>
+        <div class="card"><h3>Export your way</h3><p>Searchable PDF, Word, LibreOffice, Markdown, plain text, Excel and CSV.</p></div>
+        <div class="card"><h3>Private and offline</h3><p>Nothing is uploaded, and the text is never translated or rewritten. MIT licensed.</p></div>
       </div>
     </div>
   </section>
 
   <section id="reference">
     <div class="wrap">
-      <h2>Supported input</h2>
+      <h2>Supported input and output</h2>
       <dl class="ref">
-        <dt>Documents</dt><dd>PDF · scanned PDF · multi-page PDF</dd>
+        <dt>Documents</dt><dd>PDF · scanned PDF · multi-page PDF · multi-page TIFF</dd>
         <dt>Images</dt><dd>JPG · JPEG · PNG · BMP · TIFF · GIF · WebP</dd>
-        <dt>Sources</dt><dd>Local files · folders · direct URL</dd>
-        <dt>Output</dt><dd>Editable text on screen · plain text (.txt) export · translated text</dd>
+        <dt>Sources</dt><dd>Local files · folders · drag &amp; drop · clipboard · screen capture · scanner · URL</dd>
+        <dt>Output</dt><dd>Searchable PDF · Word (.docx) · LibreOffice (.odt) · Markdown · plain text · Excel (.xlsx) · CSV · clipboard</dd>
       </dl>
     </div>
   </section>
@@ -165,13 +176,14 @@ python3 src/pdf2go.py</code></pre>
         <table class="tbl">
           <thead><tr><th>Task</th><th>What PDF2OCR does</th></tr></thead>
           <tbody>
-          <tr><td>Extract text from a scanned PDF</td><td>OCR every page and read the text alongside the original.</td></tr>
-          <tr><td>Convert an image to text</td><td>Drop in a JPG or PNG screenshot and pull the text out.</td></tr>
-          <tr><td>OCR a photographed document</td><td>Works on phone photos of receipts, invoices and pages.</td></tr>
-          <tr><td>Get text from a PDF at a URL</td><td>Paste the link — no separate download step.</td></tr>
-          <tr><td>Save the results</td><td>Export the recognised text to a .txt file.</td></tr>
-          <tr><td>Translate a scanned page</td><td>Extract the text, then translate it in the app.</td></tr>
-          <tr><td>Digitise a book chapter</td><td>Page through a long PDF and collect the text.</td></tr>
+          <tr><td>Extract text from a scanned PDF</td><td>Open it: every page is recognised and shown beside the original.</td></tr>
+          <tr><td>Make a scanned PDF searchable</td><td>Export as Searchable PDF: it looks the same, but the text can be found and copied.</td></tr>
+          <tr><td>Convert a screenshot to text</td><td>Press Ctrl+V, use the Screenshot button, or the quick-capture shortcut.</td></tr>
+          <tr><td>OCR a photographed document</td><td>Fix perspective flattens the photo, then it is read like a scan.</td></tr>
+          <tr><td>Get a table into a spreadsheet</td><td>Select the table, click Copy as table, and paste into Calc or Excel.</td></tr>
+          <tr><td>Read a letter in another language</td><td>Pick its languages in the top bar, for example German and English.</td></tr>
+          <tr><td>Digitise a stack of paper</td><td>Scan from the document feeder, then export to Word or PDF.</td></tr>
+          <tr><td>Convert a folder of scans</td><td>Run pdf2go --to pdf ~/Scans in a terminal.</td></tr>
           </tbody>
         </table>
       </div>
@@ -182,8 +194,11 @@ python3 src/pdf2go.py</code></pre>
     <div class="wrap">
       <h2>Screenshots</h2>
       <div class="shots">
-        <img src="https://raw.githubusercontent.com/rishabh3354/PDF2OCR/master/share/screenshots/pdf2ocr_url_extract.png" alt="PDF2OCR extracting text from a PDF loaded by URL, original document on the left and recognised text on the right" loading="lazy" width="1200" height="750">
-        <img src="https://raw.githubusercontent.com/rishabh3354/PDF2OCR/master/share/screenshots/pdf2ocr_file_extract.png" alt="PDF2OCR extracting text from a local image file with the output language selector and page navigation" loading="lazy" width="1200" height="750">
+        <img src="https://raw.githubusercontent.com/rishabh3354/PDF2OCR/master/share/screenshots/01-scan-to-text.png" alt="A scanned report with page thumbnails, the original page and the recognised text, a word highlighted in both" loading="lazy" width="1920" height="1080">
+        <img src="https://raw.githubusercontent.com/rishabh3354/PDF2OCR/master/share/screenshots/02-copy-area-and-tables.png" alt="Selecting the table on a scanned invoice and copying it as spreadsheet cells, in dark mode" loading="lazy" width="1920" height="1080">
+        <img src="https://raw.githubusercontent.com/rishabh3354/PDF2OCR/master/share/screenshots/03-straighten-photos.png" alt="A phone photo of a German letter with corner handles for perspective correction" loading="lazy" width="1920" height="1080">
+        <img src="https://raw.githubusercontent.com/rishabh3354/PDF2OCR/master/share/screenshots/04-languages.png" alt="Choosing German and English as OCR languages for a straightened letter" loading="lazy" width="1920" height="1080">
+        <img src="https://raw.githubusercontent.com/rishabh3354/PDF2OCR/master/share/screenshots/05-export.png" alt="The export menu: text, Word, LibreOffice, Markdown, searchable PDF, Excel and CSV" loading="lazy" width="1920" height="1080">
       </div>
     </div>
   </section>
@@ -192,14 +207,16 @@ python3 src/pdf2go.py</code></pre>
     <div class="wrap">
       <h2>Frequently asked questions</h2>
         <details><summary>Is PDF2OCR free?</summary><p>Yes. It is free to install from the Snap Store, and the source is MIT licensed.</p></details>
-        <details><summary>Does it send my documents anywhere?</summary><p>OCR runs locally with Tesseract on your own machine, so scanned documents stay on your computer. The optional translate feature and opening a file by URL do use the network.</p></details>
-        <details><summary>What file types can it read?</summary><p>PDF files, including scanned and multi-page PDFs, plus JPG, JPEG, PNG, BMP, TIFF, GIF and WebP images.</p></details>
-        <details><summary>Is there a page limit?</summary><p>No. It handles PDFs with an unlimited number of pages.</p></details>
-        <details><summary>Can it translate the extracted text?</summary><p>Yes — the recognised text can be translated into another language inside the app.</p></details>
-        <details><summary>How accurate is the OCR?</summary><p>It uses Tesseract, so accuracy depends on the source. Clean 300 DPI scans read very well; low-resolution photos and unusual fonts read less well.</p></details>
-        <details><summary>Can I export the text?</summary><p>Yes, as a plain text (.txt) file.</p></details>
-        <details><summary>Why is the snap called pdf2go?</summary><p>The application shipped under the name PDF2Go before it was renamed, and the snap name cannot be changed without losing existing installs. `snap install pdf2go` is correct.</p></details>
-        <details><summary>Is it available for Windows or macOS?</summary><p>Not currently — the packaged build is Linux only. The source is Python and PyQt5, so it may run elsewhere, but that is untested.</p></details>
+        <details><summary>Does it send my documents anywhere?</summary><p>No. OCR runs locally with Tesseract on your own machine and works without an internet connection. The network is only used if you open a file from a URL or download an additional OCR language.</p></details>
+        <details><summary>What file types can it read?</summary><p>PDF files, including scanned and multi-page PDFs, plus JPG, JPEG, PNG, BMP, TIFF (multi-page too), GIF and WebP images. It can also take screenshots from the clipboard or the screen, and scan directly from USB and network scanners.</p></details>
+        <details><summary>Which languages does it recognise?</summary><p>15 languages are included, among them English, German, French, Spanish, Italian, Portuguese, Dutch, Polish, Russian, Ukrainian, Turkish, Arabic, Hindi, Chinese and Japanese. More than 100 others can be downloaded inside the app. Pick every language in your document for the best results.</p></details>
+        <details><summary>Is there a page limit?</summary><p>No. It handles documents with any number of pages and recognises several pages in parallel.</p></details>
+        <details><summary>How accurate is the OCR?</summary><p>It uses Tesseract, so accuracy depends on the source. Clean 300 DPI scans read very well. PDF2OCR straightens tilted pages and phone photos, keeps the exact text of digital PDFs, and flags words it is unsure about so you know what to check. Heavy blur, tiny print and handwriting remain hard.</p></details>
+        <details><summary>What can I export to?</summary><p>Searchable PDF, Word (.docx), LibreOffice (.odt), Markdown, plain text, and Excel (.xlsx) or CSV for tables. You can also copy all text, or copy a table straight into a spreadsheet.</p></details>
+        <details><summary>Does it translate or change the text?</summary><p>No. Earlier versions offered translation, which could silently change the recognised text. PDF2OCR now gives you exactly what the OCR engine read.</p></details>
+        <details><summary>Can I use it from the command line?</summary><p>Yes. For example, pdf2go --to pdf ~/Scans turns a folder of scans into searchable PDFs without opening a window, and pdf2go --capture copies the text of a screen area to the clipboard.</p></details>
+        <details><summary>Why is the snap called pdf2go?</summary><p>The application shipped under the name PDF2Go before it was renamed, and the snap name cannot be changed without losing existing installs. snap install pdf2go is correct.</p></details>
+        <details><summary>Is it available for Windows or macOS?</summary><p>Not currently. The packaged build is Linux only. The source is Python and PyQt5, so it may run elsewhere, but that is untested.</p></details>
     </div>
   </section>
 
