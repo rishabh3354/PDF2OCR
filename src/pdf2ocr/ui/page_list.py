@@ -6,6 +6,7 @@ from PyQt5.QtWidgets import QAbstractItemView, QListWidget, QListWidgetItem, QSt
 
 from ..document import Method, Status
 from .theme import theme
+from .viewer import straighten_pixmap
 
 CARD_HEIGHT = 196
 THUMB_HEIGHT = 150
@@ -36,10 +37,8 @@ class PageDelegate(QStyledItemDelegate):
             painter.drawRoundedRect(card, 10, 10)
 
         thumb_area = QRect(int(card.left()) + 10, int(card.top()) + 8, int(card.width()) - 20, THUMB_HEIGHT)
-        pixmap = self.page_list.thumbnails.get(page.id)
+        pixmap = self.page_list.display_thumbnail(page)
         if pixmap is not None and not pixmap.isNull():
-            if page.total_rotation:
-                pixmap = pixmap.transformed(QTransform().rotate(page.total_rotation), Qt.SmoothTransformation)
             scaled = pixmap.size().scaled(thumb_area.size(), Qt.KeepAspectRatio)
             target = QRect(0, 0, scaled.width(), scaled.height())
             target.moveCenter(thumb_area.center())
@@ -99,6 +98,7 @@ class PageList(QListWidget):
         self.setObjectName("PageList")
         self.pages = pages              # shared dict: page id -> Page
         self.thumbnails = {}            # page id -> QPixmap
+        self._display_cache = {}
         self.uncertain_below = 70
         self.setItemDelegate(PageDelegate(self))
         self.setSelectionMode(QAbstractItemView.ExtendedSelection)
@@ -114,6 +114,20 @@ class PageList(QListWidget):
 
     def page_for(self, page_id):
         return self.pages.get(page_id)
+
+    def display_thumbnail(self, page):
+        """The thumbnail turned and straightened like the page itself (cached)."""
+        pixmap = self.thumbnails.get(page.id)
+        if pixmap is None or pixmap.isNull() or not (page.total_rotation or page.skew):
+            return pixmap
+        key = (page.id, page.total_rotation, page.skew, pixmap.cacheKey())
+        if key not in self._display_cache:
+            shown = straighten_pixmap(pixmap, page.skew)
+            if page.total_rotation:
+                shown = shown.transformed(QTransform().rotate(page.total_rotation), Qt.SmoothTransformation)
+            self._display_cache = {k: v for k, v in self._display_cache.items() if k[0] != page.id}
+            self._display_cache[key] = shown
+        return self._display_cache[key]
 
     def add_pages(self, pages):
         for page in pages:

@@ -58,6 +58,10 @@ class PageJob:
     # as shown in the viewer, i.e. after user + auto rotation.
     crop: tuple = None
     auto_rotation: int = 0
+    # Known straightening of a slightly tilted page (counter-clockwise degrees).
+    # The upright page "as shown in the viewer" includes it, so area reads and
+    # perspective correction apply it before cropping.
+    skew: float = 0.0
 
 
 @dataclass
@@ -236,24 +240,6 @@ def straighten(img, angle):
     return img.rotate(angle, resample=Image.BICUBIC, expand=False, fillcolor=white)
 
 
-def unrotate_box(box, size, angle):
-    """Map a (left, top, width, height) pixel box from the straightened image
-    back to the original one (same canvas size, rotated about the centre)."""
-    if not angle:
-        return box
-    import math
-    left, top, width, height = box
-    cx, cy = size[0] / 2, size[1] / 2
-    cos_t, sin_t = math.cos(math.radians(angle)), math.sin(math.radians(angle))
-    xs, ys = [], []
-    for x, y in ((left, top), (left + width, top), (left, top + height), (left + width, top + height)):
-        xs.append(cx + (x - cx) * cos_t - (y - cy) * sin_t)
-        ys.append(cy + (x - cx) * sin_t + (y - cy) * cos_t)
-    x0, y0 = max(0.0, min(xs)), max(0.0, min(ys))
-    x1, y1 = min(float(size[0]), max(xs)), min(float(size[1]), max(ys))
-    return (x0, y0, max(0.0, x1 - x0), max(0.0, y1 - y0))
-
-
 def detect_rotation(png, options, token=None):
     """Clockwise degrees needed to make the page upright (0 if unsure)."""
     args = ["tesseract", png, "-", "--psm", "0"]
@@ -328,14 +314,14 @@ def rotate_box(box, degrees):
     return x0, y0, x1, y1
 
 
-def _to_page_fractions(words, size, crop, skew=0.0):
-    """Pixel boxes in the image tesseract saw -> fractions of the upright page."""
+def _to_page_fractions(words, size, crop):
+    """Pixel boxes in the image tesseract saw -> fractions of the upright,
+    straightened page (the page as the viewer shows it)."""
     width, height = size
     cx0, cy0, cx1, cy1 = crop or (0.0, 0.0, 1.0, 1.0)
     sx, sy = (cx1 - cx0) / width, (cy1 - cy0) / height
     result = []
-    for word, confidence, pixel_box in words:
-        left, top, w, h = unrotate_box(pixel_box, size, skew)
+    for word, confidence, (left, top, w, h) in words:
         box = (cx0 + left * sx, cy0 + top * sy, cx0 + (left + w) * sx, cy0 + (top + h) * sy)
         result.append((word, confidence, tuple(round(v, 5) for v in box)))
     return result
@@ -389,10 +375,12 @@ def recognize(job, options, workdir, token=None):
 
     img = rotate_clockwise(img, rotation)
     if job.crop:
+        if job.skew:
+            img = straighten(img, job.skew)  # the area was chosen on the straightened page
         img = crop_fraction(img, job.crop)
         if min(img.size) < 4:
             return OcrResult(text="", method=Method.OCR, languages=tuple(options.languages),
-                             words=[], auto_rotation=job.auto_rotation)
+                             words=[], auto_rotation=job.auto_rotation, skew=job.skew)
 
     if job.kind == "image" and options.upscale_small and max(img.size) < SMALL_IMAGE_EDGE:
         # Screenshots and small scans have tiny glyphs; tesseract does much
@@ -413,13 +401,13 @@ def recognize(job, options, workdir, token=None):
         auto_rotation = detect_rotation(png, options, token)
         if auto_rotation:
             img = rotate_clockwise(img, auto_rotation)
-    skew = 0.0
+    skew = job.skew if job.crop else 0.0
     if options.deskew and not job.crop:
         token and token.check()
         skew = detect_skew(img)
         if skew:
             img = straighten(img, skew)
-    if (auto_rotation and not job.crop) or skew:
+    if not job.crop and (auto_rotation or skew):
         img.save(png, dpi=(dpi, dpi))
 
     if job.crop and options.page_layout == 3:
@@ -428,7 +416,7 @@ def recognize(job, options, workdir, token=None):
 
     try:
         text, words, text_pdf = run_tesseract(png, base, dpi, options, token)
-        words = _to_page_fractions(words, img.size, job.crop, skew)
+        words = _to_page_fractions(words, img.size, job.crop)
     finally:
         for leftover in (png, base + ".txt", base + ".tsv"):
             if os.path.exists(leftover):
@@ -569,7 +557,8 @@ def load_upright(job, dpi, token=None):
     else:
         img, found = open_image(job.source, job.index)
         dpi = found or 300
-    return rotate_clockwise(img, job.user_rotation + job.auto_rotation), dpi
+    img = rotate_clockwise(img, job.user_rotation + job.auto_rotation)
+    return (straighten(img, job.skew) if job.skew else img), dpi
 
 
 def straighten_photo(job, corners, out_path, dpi, shape="auto", token=None):

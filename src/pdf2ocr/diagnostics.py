@@ -90,10 +90,11 @@ def collect(store=None, settings=None):
             ("Data folder used", store.tessdata_dir or "tesseract default"),
         ])
     if settings is not None:
-        keys = ["ocr/languages", "ocr/page_layout", "ocr/pdf_dpi", "ocr/use_text_layer", "ocr/parallel_pages",
-                "image/auto_rotate", "image/upscale_small", "image/improve_contrast", "image/black_and_white",
-                "image/remove_noise", "ui/theme", "ui/restore_session"]
-        section("Settings", [(key, settings.get(key)) for key in keys])
+        from .settings import DEFAULTS
+        # Every setting, so none is silently missing from bug reports; skip the
+        # ones that would reveal file paths.
+        private = {"ui/recent", "ui/last_dir"}
+        section("Settings", [(key, settings.get(key)) for key in DEFAULTS if key not in private])
 
     lines.append(f"[Recent log: {log_path()}]")
     try:

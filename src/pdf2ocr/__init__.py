@@ -3,7 +3,7 @@
 APP_NAME = "PDF2OCR"
 APP_ID = "pdf2go"
 ORG_NAME = "WarlordSoft"
-__version__ = "2026.10.1"
+__version__ = "2026.10.2"
 
 WEBSITE_URL = "https://warlordsoftwares.com/"
 FEEDBACK_URL = "https://warlordsoftwares.com/contact-us/"

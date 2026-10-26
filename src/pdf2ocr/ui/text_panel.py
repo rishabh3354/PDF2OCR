@@ -87,13 +87,14 @@ class TextPanel(QFrame):
         self.method_chip = chip()
         self.confidence_chip = chip()
         self.uncertain_chip = chip(style="ChipWarning")
+        self.skew_chip = chip()
         self.area_chip = tool_button("close", "Only the selected area of this page is read.\n"
                                               "Click to read the whole page again.",
                                      text="Selected area only", size=12)
         self.area_chip.setObjectName("ChipAccent")
         self.area_chip.setLayoutDirection(Qt.RightToLeft)
         self.area_chip.clicked.connect(lambda: self.page and self.area_reset_requested.emit(self.page.id))
-        for widget in (self.method_chip, self.confidence_chip, self.uncertain_chip, self.area_chip):
+        for widget in (self.method_chip, self.confidence_chip, self.uncertain_chip, self.skew_chip, self.area_chip):
             chips.addWidget(widget)
         chips.addStretch(1)
         top.addLayout(chips)
@@ -135,7 +136,7 @@ class TextPanel(QFrame):
         self._uncertain_selections, self._search_selections = [], []
         self.editor.setExtraSelections([])
         self._links = []
-        for widget in (self.method_chip, self.confidence_chip, self.uncertain_chip, self.area_chip):
+        for widget in (self.method_chip, self.confidence_chip, self.uncertain_chip, self.skew_chip, self.area_chip):
             widget.hide()
         self.copy_button.setEnabled(False)
         self.rerun_button.setEnabled(page is not None and page.status in (Status.DONE, Status.ERROR))
@@ -171,7 +172,7 @@ class TextPanel(QFrame):
         self._uncertain_selections, self._search_selections = [], []
         self.editor.setExtraSelections([])
         self._links = []
-        for widget in (self.method_chip, self.confidence_chip, self.uncertain_chip, self.area_chip):
+        for widget in (self.method_chip, self.confidence_chip, self.uncertain_chip, self.skew_chip, self.area_chip):
             widget.hide()
         self._set_text(text, "Nothing recognized yet.", read_only=True)
         self.copy_button.setEnabled(bool(text.strip()))
@@ -189,6 +190,12 @@ class TextPanel(QFrame):
 
     def _show_result_chips(self, page):
         self.area_chip.setVisible(bool(page.crop))
+        if page.skew:
+            self.skew_chip.setText(f"Straightened {abs(page.skew):g}°")
+            self.skew_chip.setToolTip(f"This page was tilted by {abs(page.skew):g}°. It was straightened for reading, "
+                                      "and is straightened the same way in exported searchable PDFs.\n"
+                                      "Settings → Image cleanup → “Straighten slightly tilted pages”.")
+            self.skew_chip.show()
         if page.method == Method.TEXT_LAYER:
             self.method_chip.setText("Text from PDF · exact")
             self.method_chip.setToolTip("This page already contained real text, so it was copied "

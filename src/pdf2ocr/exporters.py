@@ -134,7 +134,9 @@ def export_odt(pages, path):
 
 def export_searchable_pdf(pages, path, progress=None, token=None):
     """Original pages (or images) with tesseract's invisible text laid on top,
-    so the PDF looks exactly like the input but can be searched and copied."""
+    so the PDF looks like the input but can be searched and copied. Slightly
+    tilted pages are straightened by transforming the page content, so the
+    scan isn't re-encoded and the file stays about as small as the original."""
     import io
     from pypdf import PdfReader, PdfWriter, Transformation
 
@@ -167,6 +169,11 @@ def export_searchable_pdf(pages, path, progress=None, token=None):
             box = target.cropbox
             left, bottom = float(box.left), float(box.bottom)
             width, height = float(box.width), float(box.height)
+            if page.skew:
+                # Straighten the page the same way OCR saw it: turn its content
+                # counter-clockwise about the centre (a PDF transform, no re-encoding).
+                cx, cy = left + width / 2, bottom + height / 2
+                target.add_transformation(Transformation().translate(-cx, -cy).rotate(page.skew).translate(cx, cy))
             if page.crop:
                 # The text covers only the selected area; PDF y runs bottom-up.
                 x0, y0, x1, y1 = page.crop
@@ -174,13 +181,7 @@ def export_searchable_pdf(pages, path, progress=None, token=None):
                 width, height = (x1 - x0) * width, (y1 - y0) * height
             sx = width / float(overlay.mediabox.width)
             sy = height / float(overlay.mediabox.height)
-            placement = Transformation().scale(sx, sy)
-            if page.skew:
-                # OCR ran on a straightened copy; turn its text back by the same
-                # amount (clockwise) around the page centre to match the original.
-                placement = (placement.translate(-width / 2, -height / 2).rotate(-page.skew)
-                             .translate(width / 2, height / 2))
-            target.merge_transformed_page(overlay, placement.translate(left, bottom))
+            target.merge_transformed_page(overlay, Transformation().scale(sx, sy).translate(left, bottom))
         if progress:
             progress(number + 1, len(pages))
 

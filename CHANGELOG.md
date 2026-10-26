@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026.10.2
+
+### Fixed
+- **"Straighten slightly tilted pages" now straightens what you see and save.** Previously only the hidden copy used for OCR was straightened: the viewer, the thumbnails and exported searchable PDFs kept the tilt. Now the page is shown straightened, and searchable PDFs come out straight too. The page content is turned with a PDF transform rather than re-encoded, so files stay about the size of the original. A "Straightened 5°" label shows when a page was corrected.
+- **Missing icons in the snap.** The PyQt5 runtime used by the snap has no SVG support, so all icons were blank. Icons are now drawn without it.
+- **Diagnostics** now list every setting (including the straightening option), so bug reports are complete.
+
 ## 2026.10.1: complete redesign
 
 PDF2OCR has been rebuilt from scratch: a new interface, a new OCR engine pipeline, and many features users asked for.

@@ -19,7 +19,7 @@ from ..document import FILE_DIALOG_FILTER, Method, Status, expand_paths, is_supp
 from dataclasses import replace as dataclass_replace
 
 from ..engine import (PageJob, detect_page_corners, recognize as recognize_page, rotate_box,
-                      rotate_clockwise, straighten_photo)
+                      rotate_clockwise, straighten, straighten_photo)
 from ..exporters import (ExportPage, export_docx, export_markdown, export_odt, export_searchable_pdf, export_text,
                          join_text)
 from ..jobs import BackgroundCall, JobManager
@@ -546,7 +546,7 @@ class MainWindow(QMainWindow):
     def _job(self, page):
         kind, source, index = page.image_source
         return PageJob(page.id, kind, source, index, page.user_rotation, page.force_ocr,
-                       crop=page.crop, auto_rotation=page.auto_rotation)
+                       crop=page.crop, auto_rotation=page.auto_rotation, skew=page.skew)
 
     def _ocr_options(self):
         return self.settings.ocr_options(self.store, self.languages)
@@ -629,7 +629,7 @@ class MainWindow(QMainWindow):
         self.page_list.refresh_page(page_id)
         if page_id == self.page_list.current_id():
             self._update_viewer_words(page)
-            self.viewer.viewer.set_rotation(page.total_rotation)
+            self.viewer.viewer.set_rotation(page.total_rotation, page.skew)
         self._refresh_current_text(page_id)
         self._refresh_all_text()
 
@@ -687,7 +687,7 @@ class MainWindow(QMainWindow):
         self._update_viewer_words(page)
         self._find_highlight_page()
         if page.preview_path and os.path.exists(page.preview_path):
-            self.viewer.viewer.set_image(QPixmap(page.preview_path), page.total_rotation)
+            self.viewer.viewer.set_image(QPixmap(page.preview_path), page.total_rotation, page.skew)
         else:
             self.viewer.viewer.show_message("Loading page…")
             self.jobs.request_preview(self._job(page))
@@ -702,7 +702,7 @@ class MainWindow(QMainWindow):
             if path:
                 self.viewer.viewer.set_area(page.crop)
                 self._update_viewer_words(page)
-                self.viewer.viewer.set_image(QPixmap(path), page.total_rotation)
+                self.viewer.viewer.set_image(QPixmap(path), page.total_rotation, page.skew)
             else:
                 self.viewer.viewer.show_message("This page can't be displayed.")
 
@@ -763,7 +763,7 @@ class MainWindow(QMainWindow):
         if current:
             self.viewer.viewer.set_area(current.crop)
             self._update_viewer_words(current)
-            self.viewer.viewer.set_rotation(current.total_rotation)
+            self.viewer.viewer.set_rotation(current.total_rotation, current.skew)
         if rerun:
             self.recognize(rerun)
         self._schedule_save()
@@ -963,12 +963,12 @@ class MainWindow(QMainWindow):
             return
         inset = 0.04
         self.viewer.show_perspective(((inset, inset), (1 - inset, inset), (1 - inset, 1 - inset), (inset, 1 - inset)))
-        preview, rotation, page_id = page.preview_path, page.total_rotation, page.id
+        preview, rotation, skew, page_id = page.preview_path, page.total_rotation, page.skew, page.id
 
         def detect(_progress, _token):
             from PIL import Image
             img = rotate_clockwise(Image.open(preview), rotation)
-            return detect_page_corners(img)
+            return detect_page_corners(straighten(img, skew) if skew else img)
 
         def detected(corners):
             if corners and self.viewer.viewer.perspective_active and self.page_list.current_id() == page_id:

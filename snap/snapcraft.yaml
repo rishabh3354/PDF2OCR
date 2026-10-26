@@ -1,6 +1,6 @@
 name: pdf2go
 base: core22
-version: '2026.10.1'
+version: '2026.10.2'
 title: PDF2OCR
 summary: "Offline OCR: turn scanned PDFs, photos and screenshots into editable text"
 description: |

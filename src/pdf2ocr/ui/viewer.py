@@ -11,6 +11,26 @@ from .theme import theme
 from .widgets import tool_button
 
 MIN_SCALE, MAX_SCALE = 0.05, 8.0
+
+
+def straighten_pixmap(pixmap, skew):
+    """Turn a page preview counter-clockwise by `skew` degrees about its centre,
+    keeping the canvas size and filling the corners white - exactly how the
+    OCR engine straightens slightly tilted pages."""
+    if not skew or pixmap.isNull():
+        return pixmap
+    result = QPixmap(pixmap.size())
+    result.setDevicePixelRatio(pixmap.devicePixelRatio())
+    result.fill(Qt.white)
+    painter = QPainter(result)
+    painter.setRenderHints(QPainter.Antialiasing | QPainter.SmoothPixmapTransform)
+    w, h = pixmap.width() / pixmap.devicePixelRatio(), pixmap.height() / pixmap.devicePixelRatio()
+    painter.translate(w / 2, h / 2)
+    painter.rotate(-skew)  # Qt turns clockwise for positive angles
+    painter.translate(-w / 2, -h / 2)
+    painter.drawPixmap(0, 0, pixmap)
+    painter.end()
+    return result
 MIN_SELECTION_PX = 6
 
 
@@ -58,6 +78,7 @@ class ImageViewer(QGraphicsView):
         self.setFrameShape(QFrame.NoFrame)
         self._fit = True
         self._message = ""
+        self._source = None        # the unstraightened preview, kept for re-rotation
         self._select_mode = False
         self._origin = None
         self._band = None          # rectangle being dragged / last selection
@@ -73,10 +94,14 @@ class ImageViewer(QGraphicsView):
 
     # ---- image -------------------------------------------------------------
 
-    def set_image(self, pixmap, rotation=0):
+    def set_image(self, pixmap, rotation=0, skew=0.0):
+        """Show a page preview turned by `rotation` (multiples of 90) and
+        straightened by `skew`, i.e. exactly the page the OCR engine read."""
         self._message = ""
         self.clear_selection()
         self.stop_perspective()
+        self._source = pixmap
+        pixmap = straighten_pixmap(pixmap, skew)
         self._item.setPixmap(pixmap)
         self._item.setTransformOriginPoint(pixmap.width() / 2, pixmap.height() / 2)
         self._item.setRotation(rotation)
@@ -88,13 +113,14 @@ class ImageViewer(QGraphicsView):
             self.fit()
         self.viewport().update()
 
-    def set_rotation(self, rotation):
-        if not self._item.pixmap().isNull():
-            self.set_image(self._item.pixmap(), rotation)
+    def set_rotation(self, rotation, skew=0.0):
+        if self._source is not None and not self._source.isNull():
+            self.set_image(self._source, rotation, skew)
 
     def show_message(self, text):
         self._message = text
         self.clear_selection()
+        self._source = None
         self._item.setPixmap(QPixmap())
         self._area = None
         self._draw_area()
