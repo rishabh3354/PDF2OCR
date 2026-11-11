@@ -186,6 +186,8 @@ def export_searchable_pdf(pages, path, progress=None, token=None):
             progress(number + 1, len(pages))
 
     if hasattr(writer, "compress_identical_objects"):
-        writer.compress_identical_objects(remove_identicals=True, remove_orphans=True)
+        # Defaults merge duplicate objects and drop unused ones. Pass no arguments:
+        # pypdf 7 renamed them (remove_duplicates/remove_unreferenced).
+        writer.compress_identical_objects()
     with open(path, "wb") as handle:
         writer.write(handle)

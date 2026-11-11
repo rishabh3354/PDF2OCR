@@ -6,7 +6,7 @@ import subprocess
 import sys
 
 from . import __version__
-from .tools import find_tool, tesseract_version
+from .tools import find_tool, package_kind, tesseract_version
 
 LOG_LINES = 40
 
@@ -37,6 +37,15 @@ def _os_name():
     except OSError:
         pass
     return platform.platform()
+
+
+def _package():
+    kind = package_kind()
+    if kind == "snap":
+        return f"snap {os.environ.get('SNAP_VERSION')} (revision {os.environ.get('SNAP_REVISION')})"
+    if kind == "appimage":
+        return f"AppImage ({os.path.basename(os.environ.get('APPIMAGE', '')) or 'extracted'})"
+    return "none (running from source)"
 
 
 def _versions():
@@ -73,8 +82,7 @@ def collect(store=None, settings=None):
         ("Qt platform", QGuiApplication.platformName() if app else "n/a"),
         ("QT_QPA_PLATFORM", os.environ.get("QT_QPA_PLATFORM", "(not set)")),
         ("Screens", ", ".join(screens) or "n/a"),
-        ("Snap", f"{os.environ.get('SNAP_VERSION')} (revision {os.environ.get('SNAP_REVISION')})"
-         if os.environ.get("SNAP") else "no (running from source)"),
+        ("Package", _package()),
     ])
     section("Libraries", list(_versions().items()) + [("Python executable", sys.executable)])
     section("Tools", [

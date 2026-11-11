@@ -8,9 +8,11 @@ it with --tessdata-dir.
 
 import glob
 import os
+import shutil
+import tempfile
 import urllib.request
 
-from .tools import Cancelled, ToolError, run
+from .tools import Cancelled, ToolError, bundle_root, package_kind, run
 
 # The "fast" models: the same family Ubuntu bundles. In our tests they were as
 # accurate as the larger standard/best models on real scans, and much smaller.
@@ -82,6 +84,9 @@ def bundled_tessdata_dir():
     """The read-only tessdata folder that came with tesseract (or the snap)."""
     prefix = os.environ.get("TESSDATA_PREFIX")
     candidates = []
+    root = bundle_root()
+    if root:
+        candidates += sorted(glob.glob(os.path.join(root, "usr/share/tesseract-ocr/*/tessdata")), reverse=True)
     if prefix:
         candidates += [prefix, os.path.join(prefix, "tessdata")]
     candidates += sorted(glob.glob("/usr/share/tesseract-ocr/*/tessdata"), reverse=True)
@@ -98,11 +103,40 @@ def user_tessdata_dir():
     return os.path.join(base, "pdf2ocr", "tessdata")
 
 
+def _stable_copy(source):
+    """An AppImage is mounted at a new path for every running instance, so links
+    into it break as soon as that instance exits (e.g. a quick capture finishing
+    while the main window is open). Keep one copy per app version instead."""
+    from . import __version__
+    base = os.path.dirname(user_tessdata_dir())
+    target = os.path.join(base, f"bundled-tessdata-{__version__}")
+    try:
+        os.makedirs(base, exist_ok=True)
+        if not os.path.isdir(target):
+            temp = tempfile.mkdtemp(prefix=".bundled-", dir=base)
+            try:
+                shutil.copytree(source, os.path.join(temp, "data"))
+                os.rename(os.path.join(temp, "data"), target)
+            except OSError:
+                if not os.path.isdir(target):  # another instance may have won the race
+                    raise
+            finally:
+                shutil.rmtree(temp, ignore_errors=True)
+        for old in glob.glob(os.path.join(base, "bundled-tessdata-*")):
+            if old != target:
+                shutil.rmtree(old, ignore_errors=True)
+        return target
+    except OSError:
+        return source
+
+
 class LanguageStore:
     """Knows which languages are installed and where tesseract should look."""
 
     def __init__(self):
         self.bundled_dir = bundled_tessdata_dir()
+        if self.bundled_dir and package_kind() == "appimage":
+            self.bundled_dir = _stable_copy(self.bundled_dir)
         self.user_dir = user_tessdata_dir()
         self.tessdata_dir = None
         self._prepare()

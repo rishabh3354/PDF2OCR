@@ -127,7 +127,7 @@ parts:
       source: .
       python-packages: 
           - Pillow
-          - pypdf>=4.0
+          - pypdf>=4.0,<8
       stage-packages:
         - poppler-utils
         - tesseract-ocr

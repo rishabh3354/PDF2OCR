@@ -10,7 +10,7 @@ import re
 import subprocess
 from dataclasses import dataclass, field
 
-from .tools import Cancelled, ToolError, find_tool, run
+from .tools import Cancelled, ToolError, bundle_root, find_tool, run
 
 FEEDER_WORDS = ("adf", "feeder", "duplex")
 MODE_LABELS = {"color": "Color", "gray": "Grayscale", "grey": "Grayscale",
@@ -48,12 +48,12 @@ def available():
 
 def _environment():
     env = dict(os.environ)
-    snap = os.environ.get("SNAP")
-    if snap:
+    root = bundle_root()
+    if root:
         # SANE loads its drivers from the directories in LD_LIBRARY_PATH.
-        backends = glob.glob(os.path.join(snap, "usr/lib/*/sane"))
+        backends = glob.glob(os.path.join(root, "usr/lib/*/sane"))
         env["LD_LIBRARY_PATH"] = ":".join(backends + [env.get("LD_LIBRARY_PATH", "")]).strip(":")
-        config = os.path.join(snap, "etc/sane.d")
+        config = os.path.join(root, "etc/sane.d")
         if os.path.isdir(config) and "SANE_CONFIG_DIR" not in os.environ:
             env["SANE_CONFIG_DIR"] = config
     return env

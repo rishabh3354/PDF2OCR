@@ -51,12 +51,23 @@ class CancelToken:
             self._procs.discard(proc)
 
 
+def bundle_root():
+    """The folder holding the bundled tools when running as a snap or AppImage."""
+    return os.environ.get("SNAP") or os.environ.get("PDF2OCR_APPDIR")
+
+
+def package_kind():
+    if os.environ.get("SNAP"):
+        return "snap"
+    return "appimage" if os.environ.get("PDF2OCR_APPDIR") else None
+
+
 def find_tool(name):
-    """Prefer the copy bundled inside the snap, then fall back to $PATH."""
-    snap = os.environ.get("SNAP")
-    if snap:
+    """Prefer the copy bundled inside the snap/AppImage, then fall back to $PATH."""
+    root = bundle_root()
+    if root:
         for sub in ("usr/bin", "bin"):
-            candidate = os.path.join(snap, sub, name)
+            candidate = os.path.join(root, sub, name)
             if os.access(candidate, os.X_OK):
                 return candidate
     return shutil.which(name)

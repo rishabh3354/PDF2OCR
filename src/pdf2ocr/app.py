@@ -38,8 +38,10 @@ def fix_qt_platform():
     """
     from PyQt5.QtCore import QLibraryInfo
 
+    from .tools import bundle_root
+
     requested = os.environ.get("QT_QPA_PLATFORM", "")
-    if os.environ.get("SNAP"):
+    if bundle_root():
         if not requested or "wayland" in requested:
             os.environ["QT_QPA_PLATFORM"] = "xcb"
         return

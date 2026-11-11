@@ -71,6 +71,17 @@ To scan with a **USB scanner** from the snap, allow access once:
 sudo snap connect pdf2go:raw-usb
 ```
 
+### AppImage (no installation)
+
+Download `PDF2OCR-<version>-x86_64.AppImage` from the **[latest release](https://github.com/rishabh3354/PDF2OCR/releases/latest)**, then:
+
+```bash
+chmod +x PDF2OCR-*-x86_64.AppImage
+./PDF2OCR-*-x86_64.AppImage
+```
+
+Everything is included: Tesseract with the same 15 languages, Poppler and the SANE scanner drivers. It runs on distributions from 2022 on (glibc 2.35+: Ubuntu 22.04+, Debian 12+, Fedora 36+, Linux Mint 21+). The command line works the same way: `./PDF2OCR-*.AppImage --to pdf ~/Scans`.
+
 ---
 
 ## 🌟 Features
@@ -182,10 +193,28 @@ snapcraft
 
 The snap consumes **[pyqt5-runtime-core22-lite](https://github.com/rishabh3354/pyqt5-runtime-core22-lite)** as a content snap rather than bundling PyQt5 — see [`snap/snapcraft.yaml`](snap/snapcraft.yaml), which also shows how `TESSDATA_PREFIX`, the SANE scanner drivers and the X11 fallback for Wayland are wired up inside strict confinement.
 
+### Building the AppImage and publishing a release
+
+Needs Docker; the build runs in an Ubuntu 22.04 container and writes `dist/PDF2OCR-<version>-x86_64.AppImage`:
+
+```bash
+packaging/appimage/build-appimage.sh
+```
+
+To publish a GitHub release, set the version in `src/pdf2ocr/__init__.py` and `snap/snapcraft.yaml`, add a `## <version>` section to `CHANGELOG.md` (it becomes the release notes), commit, and run:
+
+```bash
+./release.sh
+```
+
+It builds and tests the AppImage, then creates release `v<version>` with the AppImage, its `.zsync` update file and `SHA256SUMS`. Options: `--draft`, `--skip-build`, `--yes`. Requires the GitHub CLI (`gh auth login`).
+
 ### Project layout
 
 ```
-src/pdf2go.py            launcher (used by the snap)
+src/pdf2go.py            launcher (used by the snap and the AppImage)
+packaging/appimage/      AppImage build (Dockerfile, AppDir assembly, library bundling)
+release.sh               build the AppImage and publish a GitHub release
 src/pdf2ocr/
   app.py                 start-up, Qt platform fix, crash logging
   engine.py              OCR pipeline (render, clean up, rotate, deskew, tesseract)

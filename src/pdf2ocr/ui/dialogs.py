@@ -9,7 +9,7 @@ from PyQt5.QtWidgets import (QCheckBox, QComboBox, QDialog, QDialogButtonBox, QF
                              QGroupBox, QHBoxLayout, QLabel, QLayout, QPushButton, QScrollArea,
                              QVBoxLayout, QWidget)
 
-from .. import APP_NAME, DONATE_URL, FEEDBACK_URL, SNAP_STORE_URL, WEBSITE_URL, __version__
+from .. import APP_NAME, DONATE_URL, FEEDBACK_URL, SNAP_STORE_URL, SOURCE_URL, WEBSITE_URL, __version__
 from ..engine import PAGE_LAYOUTS
 from ..diagnostics import collect as collect_diagnostics, log_path
 from ..tools import tesseract_version
@@ -205,7 +205,9 @@ class AboutDialog(QDialog):
         layout.addSpacing(12)
 
         links = QHBoxLayout()
-        for label, icon, url in [("Website", "globe", WEBSITE_URL), ("Rate app", "check", SNAP_STORE_URL),
+        # The snap store link only works for the snap; elsewhere link to the project page.
+        rate = ("Rate app", "check", SNAP_STORE_URL) if os.environ.get("SNAP") else ("GitHub", "check", SOURCE_URL)
+        for label, icon, url in [("Website", "globe", WEBSITE_URL), rate,
                                  ("Feedback", "info", FEEDBACK_URL)]:
             button = QPushButton(label)
             button.setIcon(theme().icon(icon, size=16))

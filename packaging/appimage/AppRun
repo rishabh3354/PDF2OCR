@@ -1,0 +1,21 @@
+#!/bin/sh
+# Entry point of the PDF2OCR AppImage.
+HERE="$(dirname "$(readlink -f "$0")")"
+
+# Lets the app find its bundled tesseract, poppler, SANE and language data.
+export PDF2OCR_APPDIR="$HERE"
+
+# The bundled OpenSSL looks for certificates in Debian's location; point it at
+# the host's bundle (Fedora, openSUSE, Arch keep it elsewhere) or ours.
+if [ -z "$SSL_CERT_FILE" ]; then
+    for cert in /etc/ssl/certs/ca-certificates.crt /etc/pki/tls/certs/ca-bundle.crt \
+                /etc/ssl/ca-bundle.pem /etc/ssl/cert.pem "$HERE/etc/ssl/certs/ca-certificates.crt"; do
+        if [ -r "$cert" ]; then
+            export SSL_CERT_FILE="$cert"
+            break
+        fi
+    done
+fi
+
+# -I: ignore the host's PYTHONPATH/PYTHONHOME and user site-packages.
+exec "$HERE/usr/bin/python3.10" -I "$HERE/usr/share/pdf2ocr/pdf2go.py" "$@"

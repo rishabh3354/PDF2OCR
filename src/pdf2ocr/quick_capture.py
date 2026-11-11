@@ -27,6 +27,8 @@ def capture_command():
     """The command a desktop keyboard shortcut should run."""
     if os.environ.get("SNAP"):
         return "/snap/bin/pdf2go --capture"
+    if os.environ.get("APPIMAGE"):
+        return f"{shlex.quote(os.environ['APPIMAGE'])} --capture"
     launcher = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "pdf2go.py")
     return f"{shlex.quote(sys.executable)} {shlex.quote(launcher)} --capture"
 
